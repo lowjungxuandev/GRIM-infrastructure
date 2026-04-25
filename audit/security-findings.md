@@ -3,9 +3,9 @@
 ## High
 
 - `README.md:100`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
-- `apps/grim-backend/overlays/production/ingress-openapi.yaml:10`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
+- `apps/grim-backend/overlays/production/ingress-openapi.yaml:12`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
 - `apps/grim-backend/overlays/production/ingress-patch.yaml:15`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
-- `apps/grim-backend/overlays/production/ingress-root-redirect.yaml:7`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
+- `apps/grim-backend/overlays/production/ingress-root-redirect.yaml:8`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
 - `apps/headlamp/overlays/production/ingress.yaml:18`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
 - `apps/minio/base/deployment.yaml:37`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
 - `apps/minio/overlays/production/ingress.yaml:17`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.

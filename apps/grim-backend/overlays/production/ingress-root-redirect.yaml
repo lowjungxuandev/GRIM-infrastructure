@@ -4,6 +4,7 @@ metadata:
   name: grim-backend-root
   namespace: grim
   annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/permanent-redirect: https://lowjungxuan.dpdns.org/backend/docs
 spec:
   ingressClassName: nginx
