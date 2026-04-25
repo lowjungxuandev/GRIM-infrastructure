@@ -12,6 +12,11 @@ data:
 
     discovery.kubernetes "pods" {
       role = "pod"
+
+      selectors {
+        role  = "pod"
+        field = "spec.nodeName=" + coalesce(sys.env("ALLOY_NODE_NAME"), constants.hostname)
+      }
     }
 
     discovery.relabel "pod_logs" {
@@ -52,10 +57,34 @@ data:
         source_labels = ["__meta_kubernetes_pod_label_app"]
         target_label  = "app_name"
       }
+
+      rule {
+        source_labels = ["__meta_kubernetes_pod_uid", "__meta_kubernetes_pod_container_name"]
+        separator     = "/"
+        regex         = "(.+)/(.+)"
+        replacement   = "/var/log/pods/*$1/$2/*.log"
+        target_label  = "__path__"
+      }
     }
 
-    loki.source.kubernetes "pod_logs" {
-      targets    = discovery.relabel.pod_logs.output
+    local.file_match "pod_logs" {
+      path_targets = discovery.relabel.pod_logs.output
+    }
+
+    loki.source.file "pod_logs" {
+      targets    = local.file_match.pod_logs.targets
+      forward_to = [loki.process.pod_logs.receiver]
+    }
+
+    loki.process "pod_logs" {
+      stage.cri {}
+
+      stage.labels {
+        values = {
+          stream = "",
+        }
+      }
+
       forward_to = [loki.write.local.receiver]
     }
 

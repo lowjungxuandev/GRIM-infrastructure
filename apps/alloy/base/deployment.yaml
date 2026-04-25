@@ -51,6 +51,11 @@ spec:
             - --storage.path=/var/lib/alloy/data
             - --disable-reporting
             - /etc/alloy/config.alloy
+          env:
+            - name: ALLOY_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
           ports:
             - name: http
               containerPort: 12345
@@ -85,7 +90,7 @@ spec:
                 - ALL
             privileged: false
             readOnlyRootFilesystem: true
-            runAsGroup: 473
+            runAsGroup: 0
             runAsNonRoot: true
             runAsUser: 473
           volumeMounts:
@@ -94,6 +99,9 @@ spec:
               readOnly: true
             - name: data
               mountPath: /var/lib/alloy
+            - name: varlogpods
+              mountPath: /var/log/pods
+              readOnly: true
             - name: tmp
               mountPath: /tmp
       volumes:
@@ -103,5 +111,9 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: alloy-data
+        - name: varlogpods
+          hostPath:
+            path: /var/log/pods
+            type: Directory
         - name: tmp
           emptyDir: {}
