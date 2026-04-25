@@ -26,7 +26,6 @@ For a clean VM setup, follow [docs/get-started.md](docs/get-started.md). It cove
 - `cluster/sealed-secrets`: Sealed Secrets controller install via `kustomize`
 - `apps/grim-backend`: GRIM backend base and production overlay
 - `apps/minio`: MinIO base and production overlay
-- `apps/web`: web app base and production overlay
 - `hack`: validation and smoke-test helpers
 - `audit`: generated manifest inventory, security findings, deferred items, and test results
 - `scripts`: render/apply helpers
@@ -80,7 +79,7 @@ sudo ./install-tools-ubuntu.sh
 ## Environment-Specific Values
 
 - The kubeadm config uses placeholder control plane endpoint `control-plane.example.com:6443`. Replace it with the DNS name or address for the target control plane before bootstrapping.
-- Argo CD ingress uses `argocd.example.com`, the backend API uses `api.example.com`, and the web app uses `app.example.com`. Replace those placeholders with real TLS hostnames for the target environment.
+- Argo CD ingress uses `argocd.example.com`, and the backend API uses `api.example.com`. Replace those placeholders with real TLS hostnames for the target environment.
 
 ## Notes
 

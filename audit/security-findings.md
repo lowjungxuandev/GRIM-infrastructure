@@ -5,7 +5,6 @@
 - `apps/grim-backend/base/deployment.yaml:20`: Container image uses floating latest tag: ghcr.io/lowjungxuandev/grim/backend:latest. Floating image tags reduce reproducibility; prefer immutable tags or digests.
 - `apps/grim-backend/base/ingress.yaml:2`: Ingress does not define TLS. Ingress TLS is expected for exposed HTTP services; production overlays should add a TLS block.
 - `apps/minio/base/pv.yaml:12`: PersistentVolume uses hostPath. hostPath storage is acceptable for single-node lab use but not portable production storage.
-- `apps/web/base/ingress.yaml:2`: Ingress does not define TLS. Ingress TLS is expected for exposed HTTP services; production overlays should add a TLS block.
 - `cluster/argocd/argocd-secret-accounts-patch.yaml:6`: Argo CD local account password patch stores a bcrypt hash. The hash is not plaintext, but the local account remains sensitive configuration.
 - `cluster/argocd/gitops-git-daemon-deployment.yaml:55`: Deployment uses hostPath volume. hostPath couples workloads to node-local filesystem state and increases blast radius.
 - `cluster/argocd/gitops-repo-deployment.yaml:58`: Deployment uses hostPath volume. hostPath couples workloads to node-local filesystem state and increases blast radius.

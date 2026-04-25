@@ -1,6 +1,6 @@
 # Manifest Inventory
 
-PASS parsed_yaml=57/57
+PASS parsed_yaml=44/44
 PASS required_field_checks
 PASS top_level_key_checks
 
@@ -53,24 +53,6 @@ PASS top_level_key_checks
 | apps/minio/base/secret-template.yaml | yaml | OK | template | Secret | required=PASS; top-level=PASS | 1 |
 | apps/minio/base/service.yaml | yaml | OK | full resource | Service | required=PASS; top-level=PASS | none |
 | apps/minio/overlays/production/kustomization.yaml | kustomization | OK | kustomization | Kustomization | required=PASS; top-level=PASS | none |
-
-## apps/web
-
-| File | Type | Status | Role | Kinds | Validation | Warnings |
-|---|---|---:|---|---|---|---|
-| apps/web/base/configmap.yaml | yaml | OK | full resource | ConfigMap | required=PASS; top-level=PASS | none |
-| apps/web/base/deployment.yaml | yaml | OK | full resource | Deployment | required=PASS; top-level=PASS | none |
-| apps/web/base/hpa.yaml | yaml | OK | full resource | HorizontalPodAutoscaler | required=PASS; top-level=PASS | none |
-| apps/web/base/ingress.yaml | yaml | OK | full resource | Ingress | required=PASS; top-level=PASS | 1 |
-| apps/web/base/kustomization.yaml | kustomization | OK | kustomization | Kustomization | required=PASS; top-level=PASS | none |
-| apps/web/base/namespace.yaml | yaml | OK | full resource | Namespace | required=PASS; top-level=PASS | none |
-| apps/web/base/networkpolicy-allow-from-ingress-nginx.yaml | yaml | OK | full resource | NetworkPolicy | required=PASS; top-level=PASS | none |
-| apps/web/base/networkpolicy-default-deny-ingress.yaml | yaml | OK | full resource | NetworkPolicy | required=PASS; top-level=PASS | none |
-| apps/web/base/pdb.yaml | yaml | OK | full resource | PodDisruptionBudget | required=PASS; top-level=PASS | none |
-| apps/web/base/service.yaml | yaml | OK | full resource | Service | required=PASS; top-level=PASS | none |
-| apps/web/overlays/production/deployment-patch.yaml | yaml | OK-patch | patch fragment | Deployment | required=PASS; top-level=PASS | none |
-| apps/web/overlays/production/ingress-patch.yaml | yaml | OK-patch | patch fragment | Ingress | required=PASS; top-level=PASS | none |
-| apps/web/overlays/production/kustomization.yaml | kustomization | OK | kustomization | Kustomization | required=PASS; top-level=PASS | none |
 
 ## audit
 

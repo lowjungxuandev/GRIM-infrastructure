@@ -41,9 +41,8 @@ Update ingress hostnames if this VM will use a different domain:
 - `cluster/argocd/argocd-server-ingress.yaml`
 - `apps/grim-backend/overlays/production/ingress-patch.yaml`
 - `apps/grim-backend/base/ingress.yaml` if you want the base to match production
-- `apps/web/overlays/production/ingress-patch.yaml`
 
-The checked-in placeholders are `argocd.example.com`, `api.example.com`, and `app.example.com`. Point the replacement hostnames to the ingress node and provision matching TLS certificates.
+The checked-in placeholders are `argocd.example.com` and `api.example.com`. Point the replacement hostnames to the ingress node and provision matching TLS certificates.
 
 ## 3. Install Kubernetes Tools
 
@@ -178,7 +177,6 @@ Basic HTTP checks from the VM:
 ```bash
 curl -I https://argocd.example.com/
 curl -I https://api.example.com/
-curl -I https://app.example.com/
 curl -I http://127.0.0.1
 ```
 

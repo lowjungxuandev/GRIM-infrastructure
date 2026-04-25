@@ -5,10 +5,10 @@ Validation run date: 2026-04-25.
 ## Static validation
 
 ```text
-PASS parsed_yaml=57/57
+PASS parsed_yaml=44/44
 PASS required_field_checks
 PASS top_level_key_checks
-WARN security_findings=15
+WARN security_findings=14
 ```
 
 ## Kustomize render
@@ -18,8 +18,6 @@ PASS render apps/grim-backend/base
 PASS render apps/grim-backend/overlays/production
 PASS render apps/minio/base
 PASS render apps/minio/overlays/production
-PASS render apps/web/base
-PASS render apps/web/overlays/production
 PASS render cluster/argocd
 PASS render cluster/ingress-nginx
 PASS render cluster/metrics-server
@@ -30,7 +28,7 @@ PASS render cluster/sealed-secrets
 ## kubeconform
 
 ```text
-Summary: 210 resources found in 11 files - Valid: 176, Invalid: 0, Errors: 0, Skipped: 34
+Summary: 192 resources found in 9 files - Valid: 158, Invalid: 0, Errors: 0, Skipped: 34
 ```
 
 Skipped CRD/custom-resource schema summary:
@@ -98,6 +96,8 @@ PASS old public IP/domain removed from tracked manifests and docs
 ```
 
 ## Live server-side dry-run
-SKIP server-side dry-run apps/web/overlays/production: live cluster has no `web` namespace, and no live namespace was created for this audit
+
+```text
 PASS server-side dry-run apps/grim-backend/overlays/production
 PASS server-side dry-run apps/minio/overlays/production
+```

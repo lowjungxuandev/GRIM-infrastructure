@@ -114,10 +114,9 @@ kubectl apply -f "$tmp_secret" || fail "disposable MinIO SealedSecret apply fail
 kubectl -n minio wait --for=jsonpath='{.metadata.name}'=minio-root-credentials secret/minio-root-credentials --timeout=120s || fail "disposable MinIO SealedSecret did not unseal"
 append_result "PASS disposable MinIO SealedSecret unsealed in kind"
 
-kubectl apply --server-side --dry-run=server -k apps/web/overlays/production >/dev/null || fail "server dry-run web failed"
 kubectl apply --server-side --dry-run=server -k apps/grim-backend/overlays/production >/dev/null || fail "server dry-run grim-backend failed"
 kubectl apply --server-side --dry-run=server -k apps/minio/overlays/production >/dev/null || fail "server dry-run minio failed"
-append_result "PASS server-side dry-run for web, grim-backend, and minio overlays"
+append_result "PASS server-side dry-run for grim-backend and minio overlays"
 
 tmp_runtime="$(mktemp -d)"
 kubectl kustomize apps/grim-backend/overlays/production > "$tmp_runtime/grim-backend.yaml"
@@ -135,32 +134,27 @@ with open(path, "w", encoding="utf-8") as f:
 PY
 append_result "INFO grim-backend runtime apply uses replicas=0 because external services are not available in kind"
 
-kubectl apply -k apps/web/overlays/production || fail "web apply failed"
 kubectl apply -k apps/minio/overlays/production || fail "minio apply failed"
 kubectl apply -f "$tmp_runtime/grim-backend.yaml" || fail "grim-backend replicas=0 apply failed"
-
-kubectl -n web rollout status deployment/web --timeout=180s || fail "web deployment rollout failed"
-append_result "PASS web deployment Available in kind"
 
 kubectl -n minio rollout status deployment/minio --timeout=180s || fail "minio deployment rollout failed"
 append_result "PASS minio deployment Available in kind"
 
-kubectl get namespace web grim minio >/dev/null || fail "expected namespaces missing"
+kubectl get namespace grim minio >/dev/null || fail "expected namespaces missing"
 kubectl -n minio get secret minio-root-credentials >/dev/null || fail "expected MinIO secret missing"
 
-kubectl apply -k apps/web/overlays/production >/dev/null || fail "web second apply failed"
 kubectl apply -k apps/minio/overlays/production >/dev/null || fail "minio second apply failed"
 kubectl apply -f "$tmp_runtime/grim-backend.yaml" >/dev/null || fail "grim-backend second apply failed"
 append_result "PASS idempotent second apply for smoke targets"
 
-if kubectl diff -k apps/web/overlays/production >/dev/null 2>&1; then
-  append_result "PASS kubectl diff web has no diff"
+if kubectl diff -k apps/minio/overlays/production >/dev/null 2>&1; then
+  append_result "PASS kubectl diff minio has no diff"
 else
   status=$?
   if [[ "$status" -eq 1 ]]; then
-    fail "kubectl diff web still reports changes after second apply"
+    fail "kubectl diff minio still reports changes after second apply"
   else
-    fail "kubectl diff web failed"
+    fail "kubectl diff minio failed"
   fi
 fi
 
