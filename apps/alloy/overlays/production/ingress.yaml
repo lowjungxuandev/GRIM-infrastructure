@@ -4,7 +4,6 @@ metadata:
   name: alloy
   namespace: alloy
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/auth-realm: "Alloy Authentication Required"
     nginx.ingress.kubernetes.io/auth-secret: alloy-basic-auth
     nginx.ingress.kubernetes.io/auth-type: basic
@@ -13,10 +12,6 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
 spec:
   ingressClassName: nginx
-  tls:
-    - hosts:
-        - lowjungxuan.dpdns.org
-      secretName: alloy-tls
   rules:
     - host: lowjungxuan.dpdns.org
       http:

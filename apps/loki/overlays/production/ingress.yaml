@@ -4,7 +4,6 @@ metadata:
   name: loki
   namespace: loki
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/auth-realm: "Loki Authentication Required"
     nginx.ingress.kubernetes.io/auth-secret: loki-basic-auth
     nginx.ingress.kubernetes.io/auth-type: basic
@@ -15,10 +14,6 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   ingressClassName: nginx
-  tls:
-    - hosts:
-        - lowjungxuan.dpdns.org
-      secretName: loki-tls
   rules:
     - host: lowjungxuan.dpdns.org
       http:
