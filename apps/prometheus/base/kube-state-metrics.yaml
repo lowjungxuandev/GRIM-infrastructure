@@ -183,8 +183,8 @@ spec:
             failureThreshold: 6
           livenessProbe:
             httpGet:
-              path: /livez
-              port: telemetry
+              path: /healthz
+              port: http-metrics
             initialDelaySeconds: 15
             periodSeconds: 20
             timeoutSeconds: 5
