@@ -13,3 +13,4 @@ resources:
   - service.yaml
   - networkpolicy-default-deny-ingress.yaml
   - networkpolicy-allow-from-ingress-nginx.yaml
+  - networkpolicy-allow-from-grafana.yaml
