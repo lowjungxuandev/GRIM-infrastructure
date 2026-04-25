@@ -141,7 +141,7 @@
     "role": "full resource",
     "kinds": "Deployment",
     "validation": "required=PASS; top-level=PASS",
-    "warnings": "none"
+    "warnings": "1"
   },
   {
     "path": "apps/minio/base/kustomization.yaml",
@@ -158,6 +158,15 @@
     "status": "OK",
     "role": "full resource",
     "kinds": "Namespace",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/minio/base/networkpolicy-allow-console-public.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "NetworkPolicy",
     "validation": "required=PASS; top-level=PASS",
     "warnings": "none"
   },
@@ -313,6 +322,15 @@
     "kinds": "Secret",
     "validation": "required=PASS; top-level=PASS",
     "warnings": "1"
+  },
+  {
+    "path": "cluster/argocd/argocd-server-deployment-patch.yaml",
+    "type": "yaml",
+    "status": "OK-patch",
+    "role": "patch fragment",
+    "kinds": "Deployment",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
   },
   {
     "path": "cluster/argocd/argocd-server-ingress.yaml",
