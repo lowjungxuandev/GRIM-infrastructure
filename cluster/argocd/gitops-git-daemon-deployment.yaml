@@ -12,9 +12,17 @@ spec:
       labels:
         app.kubernetes.io/name: gitops-git
     spec:
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - name: git-daemon
-          image: alpine:latest
+          image: alpine:3.23.4
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
           command:
             - /bin/sh
             - -lc
@@ -31,6 +39,13 @@ spec:
           ports:
             - containerPort: 9418
               name: git
+          resources:
+            requests:
+              cpu: 25m
+              memory: 64Mi
+            limits:
+              cpu: 250m
+              memory: 128Mi
           volumeMounts:
             - name: repo
               mountPath: /srv/git/gitops.git

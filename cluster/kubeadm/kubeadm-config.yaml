@@ -5,15 +5,15 @@ nodeRegistration:
 ---
 apiVersion: kubeadm.k8s.io/v1beta4
 kind: ClusterConfiguration
-kubernetesVersion: v1.34.0
-controlPlaneEndpoint: 89.167.40.225:6443
+kubernetesVersion: v1.36.0
+controlPlaneEndpoint: control-plane.example.com:6443
 networking:
   podSubnet: 192.168.0.0/16
   serviceSubnet: 10.96.0.0/12
   dnsDomain: cluster.local
 apiServer:
   certSANs:
-    - 89.167.40.225
+    - control-plane.example.com
 controllerManager: {}
 scheduler: {}
 ---

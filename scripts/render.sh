@@ -7,4 +7,8 @@ if [[ $# -ne 1 ]]; then
   exit 1
 fi
 
-kustomize build "$1"
+if command -v kustomize >/dev/null 2>&1; then
+  kustomize build "$1"
+else
+  kubectl kustomize "$1"
+fi

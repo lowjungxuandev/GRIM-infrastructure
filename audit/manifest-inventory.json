@@ -1,0 +1,578 @@
+[
+  {
+    "path": ".github/workflows/validate-k8s.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "<none>",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": ".gitignore",
+    "type": "text",
+    "status": "N/A",
+    "role": "N/A",
+    "kinds": "",
+    "validation": "not yaml",
+    "warnings": "see security report"
+  },
+  {
+    "path": "README.md",
+    "type": "markdown",
+    "status": "N/A",
+    "role": "N/A",
+    "kinds": "",
+    "validation": "not yaml",
+    "warnings": "see security report"
+  },
+  {
+    "path": "apps/grim-backend/base/deployment.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "Deployment",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "1"
+  },
+  {
+    "path": "apps/grim-backend/base/ingress.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "Ingress",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "1"
+  },
+  {
+    "path": "apps/grim-backend/base/kustomization.yaml",
+    "type": "kustomization",
+    "status": "OK",
+    "role": "kustomization",
+    "kinds": "Kustomization",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/grim-backend/base/namespace.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "Namespace",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/grim-backend/base/networkpolicy-allow-from-ingress-nginx.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "NetworkPolicy",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/grim-backend/base/networkpolicy-default-deny-ingress.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "NetworkPolicy",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/grim-backend/base/sealedsecret.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "SealedSecret",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/grim-backend/base/secret-template.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "template",
+    "kinds": "Secret",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "1"
+  },
+  {
+    "path": "apps/grim-backend/base/service.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "Service",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/grim-backend/overlays/production/deployment-patch.yaml",
+    "type": "yaml",
+    "status": "OK-patch",
+    "role": "patch fragment",
+    "kinds": "Deployment",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/grim-backend/overlays/production/ingress-patch.yaml",
+    "type": "yaml",
+    "status": "OK-patch",
+    "role": "patch fragment",
+    "kinds": "Ingress",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/grim-backend/overlays/production/kustomization.yaml",
+    "type": "kustomization",
+    "status": "OK",
+    "role": "kustomization",
+    "kinds": "Kustomization",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/minio/base/deployment.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "Deployment",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/minio/base/kustomization.yaml",
+    "type": "kustomization",
+    "status": "OK",
+    "role": "kustomization",
+    "kinds": "Kustomization",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/minio/base/namespace.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "Namespace",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/minio/base/networkpolicy-allow-from-grim-backend.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "NetworkPolicy",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/minio/base/networkpolicy-default-deny-ingress.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "NetworkPolicy",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/minio/base/pv.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "PersistentVolume",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "1"
+  },
+  {
+    "path": "apps/minio/base/pvc.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "PersistentVolumeClaim",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/minio/base/secret-template.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "template",
+    "kinds": "Secret",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "1"
+  },
+  {
+    "path": "apps/minio/base/service.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "Service",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/minio/overlays/production/kustomization.yaml",
+    "type": "kustomization",
+    "status": "OK",
+    "role": "kustomization",
+    "kinds": "Kustomization",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "audit/deferred-items.md",
+    "type": "markdown",
+    "status": "N/A",
+    "role": "N/A",
+    "kinds": "",
+    "validation": "not yaml",
+    "warnings": "see security report"
+  },
+  {
+    "path": "audit/manifest-inventory.json",
+    "type": "json",
+    "status": "N/A",
+    "role": "N/A",
+    "kinds": "",
+    "validation": "not yaml",
+    "warnings": "see security report"
+  },
+  {
+    "path": "audit/manifest-inventory.md",
+    "type": "markdown",
+    "status": "N/A",
+    "role": "N/A",
+    "kinds": "",
+    "validation": "not yaml",
+    "warnings": "see security report"
+  },
+  {
+    "path": "audit/pinned-versions.md",
+    "type": "markdown",
+    "status": "N/A",
+    "role": "N/A",
+    "kinds": "",
+    "validation": "not yaml",
+    "warnings": "see security report"
+  },
+  {
+    "path": "audit/security-findings.md",
+    "type": "markdown",
+    "status": "N/A",
+    "role": "N/A",
+    "kinds": "",
+    "validation": "not yaml",
+    "warnings": "see security report"
+  },
+  {
+    "path": "audit/test-results.md",
+    "type": "markdown",
+    "status": "N/A",
+    "role": "N/A",
+    "kinds": "",
+    "validation": "not yaml",
+    "warnings": "see security report"
+  },
+  {
+    "path": "cluster/argocd/argocd-cm-accounts-patch.yaml",
+    "type": "yaml",
+    "status": "OK-patch",
+    "role": "patch fragment",
+    "kinds": "ConfigMap",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "cluster/argocd/argocd-cmd-params-patch.yaml",
+    "type": "yaml",
+    "status": "OK-patch",
+    "role": "patch fragment",
+    "kinds": "ConfigMap",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "cluster/argocd/argocd-rbac-cm-patch.yaml",
+    "type": "yaml",
+    "status": "OK-patch",
+    "role": "patch fragment",
+    "kinds": "ConfigMap",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "cluster/argocd/argocd-secret-accounts-patch.yaml",
+    "type": "yaml",
+    "status": "OK-patch",
+    "role": "patch fragment",
+    "kinds": "Secret",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "1"
+  },
+  {
+    "path": "cluster/argocd/argocd-server-ingress.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "Ingress",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "cluster/argocd/gitops-git-daemon-deployment.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "Deployment",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "1"
+  },
+  {
+    "path": "cluster/argocd/gitops-git-daemon-service.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "Service",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "cluster/argocd/gitops-repo-configmap.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "ConfigMap",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "cluster/argocd/gitops-repo-deployment.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "Deployment",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "1"
+  },
+  {
+    "path": "cluster/argocd/gitops-repo-service.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "Service",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "cluster/argocd/grim-backend-application.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "Application",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "2"
+  },
+  {
+    "path": "cluster/argocd/grim-image-updater.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "ImageUpdater",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "cluster/argocd/kustomization.yaml",
+    "type": "kustomization",
+    "status": "OK",
+    "role": "kustomization",
+    "kinds": "Kustomization",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "cluster/argocd/minio-application.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "Application",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "2"
+  },
+  {
+    "path": "cluster/ingress-nginx/hostnetwork-patch.yaml",
+    "type": "yaml",
+    "status": "OK-patch",
+    "role": "patch fragment",
+    "kinds": "Deployment",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "cluster/ingress-nginx/kustomization.yaml",
+    "type": "kustomization",
+    "status": "OK",
+    "role": "kustomization",
+    "kinds": "Kustomization",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "cluster/kubeadm/README.md",
+    "type": "markdown",
+    "status": "N/A",
+    "role": "N/A",
+    "kinds": "",
+    "validation": "not yaml",
+    "warnings": "see security report"
+  },
+  {
+    "path": "cluster/kubeadm/control-plane-init.sh",
+    "type": "shell",
+    "status": "N/A",
+    "role": "N/A",
+    "kinds": "",
+    "validation": "not yaml",
+    "warnings": "see security report"
+  },
+  {
+    "path": "cluster/kubeadm/install-tools-ubuntu.sh",
+    "type": "shell",
+    "status": "N/A",
+    "role": "N/A",
+    "kinds": "",
+    "validation": "not yaml",
+    "warnings": "see security report"
+  },
+  {
+    "path": "cluster/kubeadm/kubeadm-config.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "InitConfiguration, ClusterConfiguration, KubeletConfiguration",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "cluster/metrics-server/kustomization.yaml",
+    "type": "kustomization",
+    "status": "OK",
+    "role": "kustomization",
+    "kinds": "Kustomization",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "cluster/network/calico/kustomization.yaml",
+    "type": "kustomization",
+    "status": "OK",
+    "role": "kustomization",
+    "kinds": "Kustomization",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "cluster/sealed-secrets/controller.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "ServiceAccount, Deployment, RoleBinding, Role, Service, Role, ClusterRoleBinding, ClusterRole, CustomResourceDefinition, Service, RoleBinding",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "cluster/sealed-secrets/kustomization.yaml",
+    "type": "kustomization",
+    "status": "OK",
+    "role": "kustomization",
+    "kinds": "Kustomization",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "docs/get-started.md",
+    "type": "markdown",
+    "status": "N/A",
+    "role": "N/A",
+    "kinds": "",
+    "validation": "not yaml",
+    "warnings": "see security report"
+  },
+  {
+    "path": "hack/kind-smoke.sh",
+    "type": "shell",
+    "status": "N/A",
+    "role": "N/A",
+    "kinds": "",
+    "validation": "not yaml",
+    "warnings": "see security report"
+  },
+  {
+    "path": "hack/render-all.sh",
+    "type": "shell",
+    "status": "N/A",
+    "role": "N/A",
+    "kinds": "",
+    "validation": "not yaml",
+    "warnings": "see security report"
+  },
+  {
+    "path": "hack/validate-yaml.py",
+    "type": "python",
+    "status": "N/A",
+    "role": "N/A",
+    "kinds": "",
+    "validation": "not yaml",
+    "warnings": "see security report"
+  },
+  {
+    "path": "scripts/.env.example",
+    "type": "env-template",
+    "status": "N/A",
+    "role": "N/A",
+    "kinds": "",
+    "validation": "not yaml",
+    "warnings": "see security report"
+  },
+  {
+    "path": "scripts/apply.sh",
+    "type": "shell",
+    "status": "N/A",
+    "role": "N/A",
+    "kinds": "",
+    "validation": "not yaml",
+    "warnings": "see security report"
+  },
+  {
+    "path": "scripts/generate-sealed-secret.sh",
+    "type": "shell",
+    "status": "N/A",
+    "role": "N/A",
+    "kinds": "",
+    "validation": "not yaml",
+    "warnings": "see security report"
+  },
+  {
+    "path": "scripts/render.sh",
+    "type": "shell",
+    "status": "N/A",
+    "role": "N/A",
+    "kinds": "",
+    "validation": "not yaml",
+    "warnings": "see security report"
+  },
+  {
+    "path": "scripts/update-secret.sh",
+    "type": "shell",
+    "status": "N/A",
+    "role": "N/A",
+    "kinds": "",
+    "validation": "not yaml",
+    "warnings": "see security report"
+  }
+]

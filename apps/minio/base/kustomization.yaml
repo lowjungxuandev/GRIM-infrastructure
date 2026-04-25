@@ -3,8 +3,9 @@ kind: Kustomization
 namespace: minio
 resources:
   - namespace.yaml
-  - secret.yaml
   - pv.yaml
   - pvc.yaml
   - deployment.yaml
   - service.yaml
+  - networkpolicy-default-deny-ingress.yaml
+  - networkpolicy-allow-from-grim-backend.yaml

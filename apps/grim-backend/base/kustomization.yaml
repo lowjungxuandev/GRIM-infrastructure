@@ -7,6 +7,8 @@ resources:
   - deployment.yaml
   - service.yaml
   - ingress.yaml
+  - networkpolicy-default-deny-ingress.yaml
+  - networkpolicy-allow-from-ingress-nginx.yaml
 labels:
   - pairs:
       app.kubernetes.io/name: grim-backend
