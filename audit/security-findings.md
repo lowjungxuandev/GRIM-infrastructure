@@ -4,7 +4,6 @@
 
 - `apps/grim-backend/overlays/production/ingress-patch.yaml:14`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
 - `apps/minio/base/deployment.yaml:37`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
-- `apps/minio/base/deployment.yaml:43`: Container uses hostPort. hostPort increases node-level exposure and should be avoided unless explicitly required.
 - `apps/minio/overlays/production/ingress.yaml:16`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
 - `cluster/argocd/argocd-server-ingress.yaml:12`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
 

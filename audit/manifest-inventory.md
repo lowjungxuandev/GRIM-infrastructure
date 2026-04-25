@@ -43,7 +43,7 @@ PASS top_level_key_checks
 
 | File | Type | Status | Role | Kinds | Validation | Warnings |
 |---|---|---:|---|---|---|---|
-| apps/minio/base/deployment.yaml | yaml | OK | full resource | Deployment | required=PASS; top-level=PASS | 1 |
+| apps/minio/base/deployment.yaml | yaml | OK | full resource | Deployment | required=PASS; top-level=PASS | none |
 | apps/minio/base/kustomization.yaml | kustomization | OK | kustomization | Kustomization | required=PASS; top-level=PASS | none |
 | apps/minio/base/namespace.yaml | yaml | OK | full resource | Namespace | required=PASS; top-level=PASS | none |
 | apps/minio/base/networkpolicy-allow-console-public.yaml | yaml | OK | full resource | NetworkPolicy | required=PASS; top-level=PASS | none |
