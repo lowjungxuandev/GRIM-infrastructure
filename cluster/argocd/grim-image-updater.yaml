@@ -1,0 +1,15 @@
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  name: grim-backend
+  namespace: argocd
+spec:
+  writeBackConfig:
+    method: argocd
+  applicationRefs:
+    - namePattern: grim-backend
+      commonUpdateSettings:
+        updateStrategy: digest
+      images:
+        - alias: backend
+          imageName: ghcr.io/lowjungxuandev/grim/backend:latest

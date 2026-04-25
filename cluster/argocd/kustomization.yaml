@@ -1,0 +1,22 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: argocd
+resources:
+  - https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+  - https://raw.githubusercontent.com/argoproj-labs/argocd-image-updater/stable/config/install.yaml
+  - gitops-repo-configmap.yaml
+  - gitops-repo-deployment.yaml
+  - gitops-repo-service.yaml
+  - gitops-git-daemon-deployment.yaml
+  - gitops-git-daemon-service.yaml
+  - argocd-server-ingress.yaml
+  - grim-backend-application.yaml
+  - minio-application.yaml
+  - grim-image-updater.yaml
+
+patches:
+  - path: argocd-server-deployment-patch.yaml
+  - path: argocd-cmd-params-patch.yaml
+  - path: argocd-cm-accounts-patch.yaml
+  - path: argocd-rbac-cm-patch.yaml
+  - path: argocd-secret-accounts-patch.yaml

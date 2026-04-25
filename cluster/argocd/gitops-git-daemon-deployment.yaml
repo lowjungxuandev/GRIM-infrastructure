@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gitops-git
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: gitops-git
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: gitops-git
+    spec:
+      containers:
+        - name: git-daemon
+          image: alpine:latest
+          command:
+            - /bin/sh
+            - -lc
+            - |
+              apk add --no-cache git-daemon
+              exec git daemon \
+                --verbose \
+                --export-all \
+                --reuseaddr \
+                --listen=0.0.0.0 \
+                --port=9418 \
+                --base-path=/srv/git \
+                /srv/git
+          ports:
+            - containerPort: 9418
+              name: git
+          volumeMounts:
+            - name: repo
+              mountPath: /srv/git/gitops.git
+              readOnly: true
+      volumes:
+        - name: repo
+          hostPath:
+            path: /root/gitops.git
+            type: Directory
