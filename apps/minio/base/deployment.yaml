@@ -32,6 +32,9 @@ spec:
           envFrom:
             - secretRef:
                 name: minio-root-credentials
+          env:
+            - name: MINIO_BROWSER_REDIRECT_URL
+              value: https://lowjungxuan.dpdns.org/minIO/
           ports:
             - name: api
               containerPort: 9000
