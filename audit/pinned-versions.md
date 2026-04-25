@@ -20,7 +20,7 @@ Resolved on 2026-04-25 from official release APIs, package indexes, and image re
 | bcrypt | unpinned | `5.0.0` | Pinned latest | `.github/workflows/validate-k8s.yaml` |
 | Alpine utility image | `alpine:3.22` | `alpine:3.23.4` | Updated | `cluster/argocd/gitops-git-daemon-deployment.yaml` |
 | nginx-unprivileged image | `nginxinc/nginx-unprivileged:1.27.5-alpine` | `nginxinc/nginx-unprivileged:1.29.8-alpine3.23` | Updated | `cluster/argocd/gitops-repo-deployment.yaml` |
-| MinIO image | `RELEASE.2025-09-07T16-13-09Z` | `RELEASE.2025-09-07T16-13-09Z.hotfix.7aa24e772` | Updated | `apps/minio/base/deployment.yaml` |
+| MinIO image | `RELEASE.2025-09-07T16-13-09Z` | `RELEASE.2025-09-07T16-13-09Z` | Current multi-arch | `apps/minio/base/deployment.yaml` |
 
 First-party images are intentionally not changed here:
 
