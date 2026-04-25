@@ -243,6 +243,15 @@
     "warnings": "none"
   },
   {
+    "path": "apps/minio/overlays/production/ingress-api.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "Ingress",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
     "path": "apps/minio/overlays/production/ingress.yaml",
     "type": "yaml",
     "status": "OK",
