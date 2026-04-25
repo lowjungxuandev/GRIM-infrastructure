@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grim-backend-openapi
+  namespace: grim
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - lowjungxuan.dpdns.org
+      secretName: grim-backend-tls
+  rules:
+    - host: lowjungxuan.dpdns.org
+      http:
+        paths:
+          - path: /openapi.yaml
+            pathType: Exact
+            backend:
+              service:
+                name: grim-backend
+                port:
+                  number: 80

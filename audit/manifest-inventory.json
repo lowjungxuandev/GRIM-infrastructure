@@ -117,10 +117,28 @@
     "warnings": "none"
   },
   {
+    "path": "apps/grim-backend/overlays/production/ingress-openapi.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "Ingress",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
     "path": "apps/grim-backend/overlays/production/ingress-patch.yaml",
     "type": "yaml",
     "status": "OK-patch",
     "role": "patch fragment",
+    "kinds": "Ingress",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/grim-backend/overlays/production/ingress-root-redirect.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
     "kinds": "Ingress",
     "validation": "required=PASS; top-level=PASS",
     "warnings": "none"

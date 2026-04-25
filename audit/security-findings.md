@@ -2,7 +2,9 @@
 
 ## High
 
+- `apps/grim-backend/overlays/production/ingress-openapi.yaml:10`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
 - `apps/grim-backend/overlays/production/ingress-patch.yaml:14`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
+- `apps/grim-backend/overlays/production/ingress-root-redirect.yaml:7`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
 - `apps/minio/base/deployment.yaml:37`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
 - `apps/minio/overlays/production/ingress.yaml:16`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
 - `cluster/argocd/argocd-server-ingress.yaml:12`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
