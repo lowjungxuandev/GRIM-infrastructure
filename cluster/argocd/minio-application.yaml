@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: git://gitops-git.argocd.svc.cluster.local/gitops.git
     targetRevision: main
-    path: apps/minio/base
+    path: apps/minio/overlays/production
   destination:
     server: https://kubernetes.default.svc
     namespace: minio
@@ -20,4 +20,3 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-

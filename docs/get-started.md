@@ -32,8 +32,8 @@ sudo apt-get install -y git
 
 Before running `kubeadm init`, edit `cluster/kubeadm/kubeadm-config.yaml`:
 
-- Set `controlPlaneEndpoint` to the new VM IP or DNS name with port `6443`.
-- Set `apiServer.certSANs` to include the same IP or DNS name.
+- Set `controlPlaneEndpoint` to the target DNS name or IP with port `6443`; the checked-in placeholder is `control-plane.example.com:6443`.
+- Set `apiServer.certSANs` to include the same DNS name or IP; the checked-in placeholder is `control-plane.example.com`.
 - Keep `podSubnet: 192.168.0.0/16` unless you also change the Calico configuration.
 
 Update ingress hostnames if this VM will use a different domain:
@@ -41,8 +41,9 @@ Update ingress hostnames if this VM will use a different domain:
 - `cluster/argocd/argocd-server-ingress.yaml`
 - `apps/grim-backend/overlays/production/ingress-patch.yaml`
 - `apps/grim-backend/base/ingress.yaml` if you want the base to match production
+- `apps/web/overlays/production/ingress-patch.yaml`
 
-The current manifests use `lowjungxuan.dpdns.org`. Point that DNS record, or your replacement hostname, to the new VM IP.
+The checked-in placeholders are `argocd.example.com`, `api.example.com`, and `app.example.com`. Point the replacement hostnames to the ingress node and provision matching TLS certificates.
 
 ## 3. Install Kubernetes Tools
 
@@ -110,10 +111,10 @@ kubectl -n kube-system top nodes
 
 ## 6. Access Argo CD
 
-The Argo CD ingress is defined in `cluster/argocd/argocd-server-ingress.yaml`. After DNS points to the VM, open:
+The Argo CD ingress is defined in `cluster/argocd/argocd-server-ingress.yaml`. After DNS and TLS are ready, open:
 
 ```text
-http://lowjungxuan.dpdns.org/argocd
+https://argocd.example.com/
 ```
 
 Local accounts are managed in these Kustomize patches:
@@ -144,7 +145,24 @@ kubectl apply -k apps/grim-backend/overlays/production
 
 The backend uses a SealedSecret named `grim-backend-env`. If the VM is a new cluster with a new Sealed Secrets controller key, existing sealed values may not decrypt. Re-seal the real environment values for the new cluster before scaling the app.
 
-## 8. Verify The Setup
+## 8. Prepare MinIO Credentials
+
+MinIO expects a secret named `minio-root-credentials` in the `minio` namespace. Generate it as a SealedSecret or equivalent encrypted secret before production use. A template with placeholder keys is stored at `apps/minio/base/secret-template.yaml`, but it is not referenced by Kustomize.
+
+Example SealedSecret generation flow after the target cluster and Sealed Secrets controller are reachable:
+
+```bash
+scripts/generate-sealed-secret.sh \
+  --namespace minio \
+  --name minio-root-credentials \
+  --from-literal MINIO_ROOT_USER=<username> \
+  --from-literal MINIO_ROOT_PASSWORD=<password> \
+  --controller-name sealed-secrets-controller \
+  --controller-namespace kube-system \
+  --output apps/minio/overlays/production/sealedsecret.yaml
+```
+
+## 9. Verify The Setup
 
 Run:
 
@@ -158,7 +176,9 @@ kubectl -n grim get deploy,svc,ingress,pods
 Basic HTTP checks from the VM:
 
 ```bash
-curl -I http://lowjungxuan.dpdns.org/argocd
+curl -I https://argocd.example.com/
+curl -I https://api.example.com/
+curl -I https://app.example.com/
 curl -I http://127.0.0.1
 ```
 
@@ -169,7 +189,19 @@ If ingress does not respond, check:
 - `ingress-nginx-controller` is running with `hostNetwork: true`.
 - No other process on the VM is already binding ports `80` or `443`.
 
-## 9. Common Maintenance
+## 10. Validation Workflow
+
+Run the local validation stack before pushing changes:
+
+```bash
+python3 hack/validate-yaml.py --root . --write-report
+bash hack/render-all.sh
+bash hack/kind-smoke.sh
+```
+
+The render helper uses standalone `kustomize` when present and falls back to `kubectl kustomize`.
+
+## 11. Common Maintenance
 
 Render an overlay without applying it:
 

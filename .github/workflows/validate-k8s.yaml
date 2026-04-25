@@ -1,0 +1,68 @@
+name: validate-k8s
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Python dependencies
+        run: python3 -m pip install --user pyyaml bcrypt
+
+      - name: Install kubectl
+        run: |
+          mkdir -p .bin
+          version="$(curl -fsSL https://dl.k8s.io/release/stable.txt)"
+          curl -fsSL -o .bin/kubectl "https://dl.k8s.io/release/${version}/bin/linux/amd64/kubectl"
+          chmod +x .bin/kubectl
+          echo "$PWD/.bin" >> "$GITHUB_PATH"
+
+      - name: Install kind
+        run: |
+          mkdir -p .bin
+          curl -fsSL -o .bin/kind https://kind.sigs.k8s.io/dl/v0.31.0/kind-linux-amd64
+          chmod +x .bin/kind
+          echo "$PWD/.bin" >> "$GITHUB_PATH"
+
+      - name: Install kubeseal
+        run: |
+          mkdir -p .bin
+          version="v0.36.6"
+          curl -fsSL -o /tmp/kubeseal.tar.gz "https://github.com/bitnami-labs/sealed-secrets/releases/download/${version}/kubeseal-${version#v}-linux-amd64.tar.gz"
+          tar -xzf /tmp/kubeseal.tar.gz -C /tmp kubeseal
+          mv /tmp/kubeseal .bin/kubeseal
+          chmod +x .bin/kubeseal
+          echo "$PWD/.bin" >> "$GITHUB_PATH"
+
+      - name: Install kubeconform
+        run: |
+          mkdir -p .bin
+          version="v0.7.0"
+          curl -fsSL -o /tmp/kubeconform.tar.gz "https://github.com/yannh/kubeconform/releases/download/${version}/kubeconform-linux-amd64.tar.gz"
+          tar -xzf /tmp/kubeconform.tar.gz -C /tmp kubeconform
+          mv /tmp/kubeconform .bin/kubeconform
+          chmod +x .bin/kubeconform
+          echo "$PWD/.bin" >> "$GITHUB_PATH"
+
+      - name: Static validation
+        run: python3 hack/validate-yaml.py --root . --write-report
+
+      - name: Render Kustomizations
+        run: bash hack/render-all.sh
+
+      - name: Schema validation
+        run: |
+          mkdir -p audit
+          {
+            echo "## kubeconform"
+            find rendered -name '*.yaml' -print0 \
+              | xargs -0 kubeconform -strict -summary -ignore-missing-schemas
+          } | tee -a audit/test-results.md
+
+      - name: kind smoke
+        run: bash hack/kind-smoke.sh

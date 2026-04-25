@@ -7,11 +7,15 @@ metadata:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - argocd.example.com
+      secretName: argocd-server-tls
   rules:
-    - host: lowjungxuan.dpdns.org
+    - host: argocd.example.com
       http:
         paths:
-          - path: /argocd
+          - path: /
             pathType: Prefix
             backend:
               service:

@@ -12,9 +12,18 @@ spec:
       labels:
         app.kubernetes.io/name: web
     spec:
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - name: web
           image: nginxinc/nginx-unprivileged:1.27.5-alpine
+          securityContext:
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
           ports:
             - containerPort: 8080
               name: http

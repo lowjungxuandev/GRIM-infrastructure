@@ -22,9 +22,13 @@ For a clean VM setup, follow [docs/get-started.md](docs/get-started.md). It cove
 - `cluster/kubeadm`: bootstrap files and helper scripts for a normal Kubernetes control plane
 - `cluster/network/calico`: CNI install via `kustomize`
 - `cluster/ingress-nginx`: ingress controller install via `kustomize`
-- `cluster/argocd`: Argo CD, Image Updater, dashboard ingress, and GRIM application
+- `cluster/argocd`: Argo CD, Image Updater, dashboard ingress, and GRIM applications
 - `cluster/sealed-secrets`: Sealed Secrets controller install via `kustomize`
 - `apps/grim-backend`: GRIM backend base and production overlay
+- `apps/minio`: MinIO base and production overlay
+- `apps/web`: web app base and production overlay
+- `hack`: validation and smoke-test helpers
+- `audit`: generated manifest inventory, security findings, deferred items, and test results
 - `scripts`: render/apply helpers
 - `docs`: operator setup and runbook documentation
 
@@ -73,15 +77,28 @@ cd /root/k8s/cluster/kubeadm
 sudo ./install-tools-ubuntu.sh
 ```
 
-## VM-Specific Values
+## Environment-Specific Values
 
-- The kubeadm config currently uses control plane endpoint `89.167.40.225:6443`. Update `cluster/kubeadm/kubeadm-config.yaml` before bootstrapping a different VM.
-- The ingress host currently uses `lowjungxuan.dpdns.org` for both Argo CD and the GRIM backend. Update `cluster/argocd/argocd-server-ingress.yaml` and `apps/grim-backend/overlays/production/ingress-patch.yaml` if you want separate hostnames.
+- The kubeadm config uses placeholder control plane endpoint `control-plane.example.com:6443`. Replace it with the DNS name or address for the target control plane before bootstrapping.
+- Argo CD ingress uses `argocd.example.com`, the backend API uses `api.example.com`, and the web app uses `app.example.com`. Replace those placeholders with real TLS hostnames for the target environment.
 
 ## Notes
 
 - The kubeadm config uses pod CIDR `192.168.0.0/16`, which matches the Calico manifest referenced here.
 - The ingress controller uses the official bare-metal deployment patched to `hostNetwork: true`, so ports `80` and `443` bind directly on the ingress node.
-- Argo CD dashboard ingress is configured in `cluster/argocd/argocd-server-ingress.yaml`.
+- Argo CD dashboard ingress is configured in `cluster/argocd/argocd-server-ingress.yaml` and expects HTTPS termination at ingress.
 - The GRIM `Application` uses an internal Git HTTP service in the cluster. The backing bare repository is stored on this VM.
 - The GRIM backend requires real Cloudinary, Firebase, and LLM credentials. Those are now managed with Sealed Secrets. The deployment defaults to `replicas: 0` until you seal real values and then scale it up.
+- MinIO credentials must be generated as a SealedSecret or equivalent encrypted secret before production use. Do not commit plaintext MinIO credentials.
+
+## Validation
+
+Run the local checks before committing manifest changes:
+
+```bash
+python3 hack/validate-yaml.py --root . --write-report
+bash hack/render-all.sh
+bash hack/kind-smoke.sh
+```
+
+`hack/render-all.sh` writes rendered manifests under `rendered/`. The CI workflow in `.github/workflows/validate-k8s.yaml` runs the same static, render, schema, and kind smoke checks.

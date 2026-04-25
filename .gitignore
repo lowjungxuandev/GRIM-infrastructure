@@ -1,2 +1,15 @@
 scripts/update-secret.sh
 scripts/.env
+.env
+.env.*
+rendered/
+audit/test-artifacts/
+.bin/
+__pycache__/
+*.pyc
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+.DS_Store

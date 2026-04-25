@@ -12,10 +12,18 @@ spec:
       labels:
         app.kubernetes.io/name: minio
     spec:
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - name: minio
           image: quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z
           imagePullPolicy: IfNotPresent
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
           args:
             - server
             - /data
@@ -27,10 +35,8 @@ spec:
           ports:
             - name: api
               containerPort: 9000
-              hostPort: 9000
             - name: console
               containerPort: 9001
-              hostPort: 9001
           readinessProbe:
             httpGet:
               path: /minio/health/ready

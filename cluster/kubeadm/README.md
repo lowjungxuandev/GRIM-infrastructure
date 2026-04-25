@@ -27,6 +27,15 @@ That script:
 - initializes the cluster with `kubeadm init --config kubeadm-config.yaml`
 - writes admin kubeconfig to `$HOME/.kube/config`
 
+Before production bootstrap, make swap disablement persistent in the host OS configuration and verify it after reboot. Also replace the placeholder control plane DNS name `control-plane.example.com` in `kubeadm-config.yaml` with the target control plane endpoint and matching certificate SAN.
+
+After bootstrap, run the repository validation workflow from the repo root:
+
+```bash
+python3 hack/validate-yaml.py --root . --write-report
+bash hack/render-all.sh
+```
+
 ## Worker Join
 
 After control plane initialization, generate a join command:
