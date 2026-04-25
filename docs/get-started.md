@@ -1,6 +1,6 @@
 # Get Started On A New VM
 
-This guide bootstraps this repository on a fresh Ubuntu/Debian VM using upstream Kubernetes with `kubeadm`, `containerd`, Calico, ingress-nginx, metrics-server, Sealed Secrets, Argo CD, and the GRIM backend manifests.
+This guide bootstraps this repository on a fresh Ubuntu/Debian VM using upstream Kubernetes with `kubeadm`, `containerd`, Calico, ingress-nginx, metrics-server, cert-manager, Sealed Secrets, Argo CD, and the GRIM backend manifests.
 
 ## 1. Prepare The VM
 
@@ -40,9 +40,19 @@ Update ingress hostnames if this VM will use a different domain:
 
 - `cluster/argocd/argocd-server-ingress.yaml`
 - `apps/grim-backend/overlays/production/ingress-patch.yaml`
+- `apps/minio/overlays/production/ingress.yaml`
+- `apps/minio/overlays/production/ingress-api.yaml`
+- `apps/minio/overlays/production/deployment-patch.yaml`
 - `apps/grim-backend/base/ingress.yaml` if you want the base to match production
 
 The checked-in placeholders are `argocd.example.com` and `api.example.com`. Point the replacement hostnames to the ingress node and provision matching TLS certificates.
+
+For this environment, keep:
+
+- MinIO console: `https://lowjungxuan.dpdns.org/minIO/`
+- MinIO S3 API: `https://lowjxn8n.dpdns.org/`
+
+If DNS is managed in Cloudflare, set the S3 API hostname to DNS-only and point it to the ingress node IP. Do not proxy S3 API traffic through Cloudflare unless you have explicitly accepted Cloudflare upload-size and S3 compatibility limits.
 
 ## 3. Install Kubernetes Tools
 
@@ -95,6 +105,9 @@ kubectl wait --for=condition=Ready nodes --all --timeout=180s
 
 kubectl apply -k cluster/ingress-nginx
 kubectl apply -k cluster/metrics-server
+kubectl apply -k cluster/cert-manager
+kubectl -n cert-manager wait --for=condition=Available deployment/cert-manager-webhook --timeout=180s
+kubectl apply -k cluster/cert-manager-issuers
 kubectl apply -k cluster/sealed-secrets
 kubectl apply -k cluster/argocd
 ```
@@ -104,6 +117,7 @@ Check that the main system pods are running:
 ```bash
 kubectl get pods -A
 kubectl -n ingress-nginx get pods
+kubectl -n cert-manager get pods
 kubectl -n argocd get pods
 kubectl -n kube-system top nodes
 ```
@@ -161,7 +175,23 @@ scripts/generate-sealed-secret.sh \
   --output apps/minio/overlays/production/sealedsecret.yaml
 ```
 
-## 9. Verify The Setup
+## 9. Verify MinIO DNS And TLS
+
+The MinIO console and S3 API intentionally use different routes:
+
+```text
+https://lowjungxuan.dpdns.org/minIO/  # console, service port 9001
+https://lowjxn8n.dpdns.org/           # S3 API, service port 9000
+```
+
+After DNS points `lowjxn8n.dpdns.org` directly to the ingress node, cert-manager should create `minio-api-tls` in the `minio` namespace:
+
+```bash
+kubectl -n minio get ingress,certificate,secret
+curl -I https://lowjxn8n.dpdns.org/minio/health/live
+```
+
+## 10. Verify The Setup
 
 Run:
 
@@ -170,6 +200,7 @@ kubectl get nodes -o wide
 kubectl get ingress -A
 kubectl -n argocd get applications
 kubectl -n grim get deploy,svc,ingress,pods
+kubectl -n minio get deploy,svc,ingress,pods
 ```
 
 Basic HTTP checks from the VM:
@@ -177,6 +208,7 @@ Basic HTTP checks from the VM:
 ```bash
 curl -I https://argocd.example.com/
 curl -I https://api.example.com/
+curl -I https://lowjxn8n.dpdns.org/minio/health/live
 curl -I http://127.0.0.1
 ```
 
@@ -187,7 +219,7 @@ If ingress does not respond, check:
 - `ingress-nginx-controller` is running with `hostNetwork: true`.
 - No other process on the VM is already binding ports `80` or `443`.
 
-## 10. Validation Workflow
+## 11. Validation Workflow
 
 Run the local validation stack before pushing changes:
 
@@ -199,7 +231,7 @@ bash hack/kind-smoke.sh
 
 The render helper uses standalone `kustomize` when present and falls back to `kubectl kustomize`.
 
-## 11. Common Maintenance
+## 12. Common Maintenance
 
 Render an overlay without applying it:
 

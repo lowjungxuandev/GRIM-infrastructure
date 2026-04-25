@@ -243,6 +243,24 @@
     "warnings": "none"
   },
   {
+    "path": "apps/minio/overlays/production/deployment-patch.yaml",
+    "type": "yaml",
+    "status": "OK-patch",
+    "role": "patch fragment",
+    "kinds": "Deployment",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/minio/overlays/production/ingress-api.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "Ingress",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
     "path": "apps/minio/overlays/production/ingress.yaml",
     "type": "yaml",
     "status": "OK",
@@ -257,6 +275,15 @@
     "status": "OK",
     "role": "kustomization",
     "kinds": "Kustomization",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/minio/overlays/production/networkpolicy-allow-api-from-ingress-nginx.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "NetworkPolicy",
     "validation": "required=PASS; top-level=PASS",
     "warnings": "none"
   },
@@ -448,6 +475,33 @@
     "kinds": "Application",
     "validation": "required=PASS; top-level=PASS",
     "warnings": "2"
+  },
+  {
+    "path": "cluster/cert-manager-issuers/clusterissuer-letsencrypt-prod.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "ClusterIssuer",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "cluster/cert-manager-issuers/kustomization.yaml",
+    "type": "kustomization",
+    "status": "OK",
+    "role": "kustomization",
+    "kinds": "Kustomization",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "cluster/cert-manager/kustomization.yaml",
+    "type": "kustomization",
+    "status": "OK",
+    "role": "kustomization",
+    "kinds": "Kustomization",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
   },
   {
     "path": "cluster/ingress-nginx/hostnetwork-patch.yaml",

@@ -6,6 +6,7 @@ This directory sets up a standard upstream Kubernetes cluster workflow with:
 - Calico for CNI
 - ingress-nginx for ingress
 - metrics-server for resource metrics and HPA support
+- cert-manager for ingress TLS certificates
 - Argo CD for GitOps sync and dashboard
 - Argo CD Image Updater for automatic image refresh
 - Sealed Secrets for encrypted secret management
@@ -22,6 +23,8 @@ For a clean VM setup, follow [docs/get-started.md](docs/get-started.md). It cove
 - `cluster/kubeadm`: bootstrap files and helper scripts for a normal Kubernetes control plane
 - `cluster/network/calico`: CNI install via `kustomize`
 - `cluster/ingress-nginx`: ingress controller install via `kustomize`
+- `cluster/cert-manager`: cert-manager install via pinned upstream manifest
+- `cluster/cert-manager-issuers`: Let's Encrypt ClusterIssuer resources
 - `cluster/argocd`: Argo CD, Image Updater, dashboard ingress, and GRIM applications
 - `cluster/sealed-secrets`: Sealed Secrets controller install via `kustomize`
 - `apps/grim-backend`: GRIM backend base and production overlay
@@ -39,9 +42,10 @@ For a clean VM setup, follow [docs/get-started.md](docs/get-started.md). It cove
 4. Install Calico.
 5. Install ingress-nginx.
 6. Install metrics-server.
-7. Install Argo CD.
-8. Install Sealed Secrets.
-9. Apply the GRIM backend overlay directly or let Argo CD manage it.
+7. Install cert-manager.
+8. Install Argo CD.
+9. Install Sealed Secrets.
+10. Apply the GRIM backend overlay directly or let Argo CD manage it.
 
 ## Commands
 
@@ -56,6 +60,13 @@ cd /root/k8s
 
 ./scripts/render.sh cluster/metrics-server
 ./scripts/apply.sh cluster/metrics-server
+
+./scripts/render.sh cluster/cert-manager
+./scripts/apply.sh cluster/cert-manager
+kubectl -n cert-manager wait --for=condition=Available deployment/cert-manager-webhook --timeout=180s
+
+./scripts/render.sh cluster/cert-manager-issuers
+./scripts/apply.sh cluster/cert-manager-issuers
 
 ./scripts/render.sh cluster/argocd
 ./scripts/apply.sh cluster/argocd
@@ -85,6 +96,8 @@ sudo ./install-tools-ubuntu.sh
 
 - The kubeadm config uses pod CIDR `192.168.0.0/16`, which matches the Calico manifest referenced here.
 - The ingress controller uses the official bare-metal deployment patched to `hostNetwork: true`, so ports `80` and `443` bind directly on the ingress node.
+- The MinIO console is served at `https://lowjungxuan.dpdns.org/minIO/`; the S3 API is served separately at `https://lowjxn8n.dpdns.org/`.
+- Keep the MinIO S3 API DNS record DNS-only when using Cloudflare. S3 clients and presigned URLs are sensitive to proxy upload limits and signature-changing behavior.
 - Argo CD dashboard ingress is configured in `cluster/argocd/argocd-server-ingress.yaml` and expects HTTPS termination at ingress.
 - The GRIM `Application` uses an internal Git HTTP service in the cluster. The backing bare repository is stored on this VM.
 - The GRIM backend requires real Cloudinary, Firebase, and LLM credentials. Those are now managed with Sealed Secrets. The deployment defaults to `replicas: 0` until you seal real values and then scale it up.

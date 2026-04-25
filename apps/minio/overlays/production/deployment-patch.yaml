@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minio
+spec:
+  template:
+    spec:
+      containers:
+        - name: minio
+          env:
+            - name: MINIO_SERVER_URL
+              value: https://lowjxn8n.dpdns.org

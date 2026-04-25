@@ -10,6 +10,7 @@ Resolved on 2026-04-25 from official release APIs, package indexes, and image re
 | Argo CD Image Updater | `v1.1.1` | `v1.1.1` | Current | `https://raw.githubusercontent.com/argoproj-labs/argocd-image-updater/v1.1.1/config/install.yaml` |
 | ingress-nginx | `controller-v1.15.1` | `controller-v1.15.1` | Current | `cluster/ingress-nginx/kustomization.yaml` |
 | metrics-server | `v0.8.1` | `v0.8.1` | Current | `https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.8.1/components.yaml` |
+| cert-manager | new | `v1.20.2` | Pinned latest | `https://github.com/cert-manager/cert-manager/releases/download/v1.20.2/cert-manager.yaml` |
 | Calico | `v3.31.4` | `v3.31.5` | Updated | `cluster/network/calico/kustomization.yaml` |
 | Sealed Secrets controller | `v0.32.1` | `v0.36.6` | Updated | `cluster/sealed-secrets/controller.yaml` |
 | kubeseal | `v0.36.6` | `v0.36.6` | Current | `.github/workflows/validate-k8s.yaml`, `hack/kind-smoke.sh` |

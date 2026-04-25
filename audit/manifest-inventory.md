@@ -1,6 +1,6 @@
 # Manifest Inventory
 
-PASS parsed_yaml=49/49
+PASS parsed_yaml=55/55
 PASS required_field_checks
 PASS top_level_key_checks
 
@@ -55,8 +55,11 @@ PASS top_level_key_checks
 | apps/minio/base/pvc.yaml | yaml | OK | full resource | PersistentVolumeClaim | required=PASS; top-level=PASS | none |
 | apps/minio/base/secret-template.yaml | yaml | OK | template | Secret | required=PASS; top-level=PASS | 1 |
 | apps/minio/base/service.yaml | yaml | OK | full resource | Service | required=PASS; top-level=PASS | none |
+| apps/minio/overlays/production/deployment-patch.yaml | yaml | OK-patch | patch fragment | Deployment | required=PASS; top-level=PASS | none |
+| apps/minio/overlays/production/ingress-api.yaml | yaml | OK | full resource | Ingress | required=PASS; top-level=PASS | none |
 | apps/minio/overlays/production/ingress.yaml | yaml | OK | full resource | Ingress | required=PASS; top-level=PASS | none |
 | apps/minio/overlays/production/kustomization.yaml | kustomization | OK | kustomization | Kustomization | required=PASS; top-level=PASS | none |
+| apps/minio/overlays/production/networkpolicy-allow-api-from-ingress-nginx.yaml | yaml | OK | full resource | NetworkPolicy | required=PASS; top-level=PASS | none |
 
 ## audit
 
@@ -88,6 +91,19 @@ PASS top_level_key_checks
 | cluster/argocd/grim-image-updater.yaml | yaml | OK | full resource | ImageUpdater | required=PASS; top-level=PASS | none |
 | cluster/argocd/kustomization.yaml | kustomization | OK | kustomization | Kustomization | required=PASS; top-level=PASS | none |
 | cluster/argocd/minio-application.yaml | yaml | OK | full resource | Application | required=PASS; top-level=PASS | 2 |
+
+## cluster/cert-manager
+
+| File | Type | Status | Role | Kinds | Validation | Warnings |
+|---|---|---:|---|---|---|---|
+| cluster/cert-manager/kustomization.yaml | kustomization | OK | kustomization | Kustomization | required=PASS; top-level=PASS | none |
+
+## cluster/cert-manager-issuers
+
+| File | Type | Status | Role | Kinds | Validation | Warnings |
+|---|---|---:|---|---|---|---|
+| cluster/cert-manager-issuers/clusterissuer-letsencrypt-prod.yaml | yaml | OK | full resource | ClusterIssuer | required=PASS; top-level=PASS | none |
+| cluster/cert-manager-issuers/kustomization.yaml | kustomization | OK | kustomization | Kustomization | required=PASS; top-level=PASS | none |
 
 ## cluster/ingress-nginx
 

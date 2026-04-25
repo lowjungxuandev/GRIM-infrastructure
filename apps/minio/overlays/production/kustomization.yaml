@@ -3,3 +3,7 @@ kind: Kustomization
 resources:
   - ../../base
   - ingress.yaml
+  - ingress-api.yaml
+  - networkpolicy-allow-api-from-ingress-nginx.yaml
+patches:
+  - path: deployment-patch.yaml

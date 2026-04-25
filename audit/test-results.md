@@ -101,3 +101,4 @@ PASS old public IP/domain removed from tracked manifests and docs
 PASS server-side dry-run apps/grim-backend/overlays/production
 PASS server-side dry-run apps/minio/overlays/production
 ```
+SKIP kind smoke: no supported container runtime
