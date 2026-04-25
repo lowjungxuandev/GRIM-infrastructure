@@ -1,6 +1,6 @@
 # Manifest Inventory
 
-PASS parsed_yaml=47/47
+PASS parsed_yaml=49/49
 PASS required_field_checks
 PASS top_level_key_checks
 
@@ -36,7 +36,9 @@ PASS top_level_key_checks
 | apps/grim-backend/base/secret-template.yaml | yaml | OK | template | Secret | required=PASS; top-level=PASS | 1 |
 | apps/grim-backend/base/service.yaml | yaml | OK | full resource | Service | required=PASS; top-level=PASS | none |
 | apps/grim-backend/overlays/production/deployment-patch.yaml | yaml | OK-patch | patch fragment | Deployment | required=PASS; top-level=PASS | none |
+| apps/grim-backend/overlays/production/ingress-openapi.yaml | yaml | OK | full resource | Ingress | required=PASS; top-level=PASS | none |
 | apps/grim-backend/overlays/production/ingress-patch.yaml | yaml | OK-patch | patch fragment | Ingress | required=PASS; top-level=PASS | none |
+| apps/grim-backend/overlays/production/ingress-root-redirect.yaml | yaml | OK | full resource | Ingress | required=PASS; top-level=PASS | none |
 | apps/grim-backend/overlays/production/kustomization.yaml | kustomization | OK | kustomization | Kustomization | required=PASS; top-level=PASS | none |
 
 ## apps/minio

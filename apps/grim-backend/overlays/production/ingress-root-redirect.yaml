@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grim-backend-root
+  namespace: grim
+  annotations:
+    nginx.ingress.kubernetes.io/permanent-redirect: https://lowjungxuan.dpdns.org/backend/docs
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - lowjungxuan.dpdns.org
+      secretName: grim-backend-tls
+  rules:
+    - host: lowjungxuan.dpdns.org
+      http:
+        paths:
+          - path: /backend
+            pathType: Exact
+            backend:
+              service:
+                name: grim-backend
+                port:
+                  number: 80
+          - path: /backend/
+            pathType: Exact
+            backend:
+              service:
+                name: grim-backend
+                port:
+                  number: 80
