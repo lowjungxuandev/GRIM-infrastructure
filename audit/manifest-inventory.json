@@ -481,7 +481,7 @@
     "type": "yaml",
     "status": "OK",
     "role": "full resource",
-    "kinds": "CustomResourceDefinition, Service, Role, ClusterRoleBinding, ClusterRole, RoleBinding, ServiceAccount, Deployment, Service, RoleBinding, Role",
+    "kinds": "ServiceAccount, Deployment, RoleBinding, Role, Service, Role, ClusterRoleBinding, ClusterRole, CustomResourceDefinition, Service, RoleBinding",
     "validation": "required=PASS; top-level=PASS",
     "warnings": "none"
   },

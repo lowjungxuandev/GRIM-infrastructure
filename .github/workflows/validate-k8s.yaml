@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v6.0.2
 
       - name: Install Python dependencies
-        run: python3 -m pip install --user pyyaml bcrypt
+        run: python3 -m pip install --user PyYAML==6.0.3 bcrypt==5.0.0
 
       - name: Install kubectl
         run: |

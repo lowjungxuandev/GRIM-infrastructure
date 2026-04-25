@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-K8S_MINOR_VERSION="${K8S_MINOR_VERSION:-v1.34}"
+K8S_MINOR_VERSION="${K8S_MINOR_VERSION:-v1.36}"
 
 apt-get update
 apt-get install -y apt-transport-https ca-certificates curl gpg containerd

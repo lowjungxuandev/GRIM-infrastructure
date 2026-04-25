@@ -116,7 +116,7 @@ PASS top_level_key_checks
 
 | File | Type | Status | Role | Kinds | Validation | Warnings |
 |---|---|---:|---|---|---|---|
-| cluster/sealed-secrets/controller.yaml | yaml | OK | full resource | CustomResourceDefinition, Service, Role, ClusterRoleBinding, ClusterRole, RoleBinding, ServiceAccount, Deployment, Service, RoleBinding, Role | required=PASS; top-level=PASS | none |
+| cluster/sealed-secrets/controller.yaml | yaml | OK | full resource | ServiceAccount, Deployment, RoleBinding, Role, Service, Role, ClusterRoleBinding, ClusterRole, CustomResourceDefinition, Service, RoleBinding | required=PASS; top-level=PASS | none |
 | cluster/sealed-secrets/kustomization.yaml | kustomization | OK | kustomization | Kustomization | required=PASS; top-level=PASS | none |
 
 ## docs

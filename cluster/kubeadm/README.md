@@ -4,11 +4,11 @@ This is a standard upstream Kubernetes setup based on `kubeadm`.
 
 ## Target
 
-- Kubernetes: `v1.34.0`
+- Kubernetes: `v1.36.0`
 - kubeadm config API: `kubeadm.k8s.io/v1beta4`
 - Container runtime: `containerd`
 
-`v1.34` is the version used by the current Kubernetes `kubeadm` installation guide on `kubernetes.io`.
+`v1.36` is the current upstream stable Kubernetes minor version used by this repository.
 
 ## Control Plane Init
 
