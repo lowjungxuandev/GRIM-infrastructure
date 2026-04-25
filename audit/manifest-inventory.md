@@ -1,6 +1,6 @@
 # Manifest Inventory
 
-PASS parsed_yaml=55/55
+PASS parsed_yaml=67/67
 PASS required_field_checks
 PASS top_level_key_checks
 
@@ -40,6 +40,22 @@ PASS top_level_key_checks
 | apps/grim-backend/overlays/production/ingress-patch.yaml | yaml | OK-patch | patch fragment | Ingress | required=PASS; top-level=PASS | none |
 | apps/grim-backend/overlays/production/ingress-root-redirect.yaml | yaml | OK | full resource | Ingress | required=PASS; top-level=PASS | none |
 | apps/grim-backend/overlays/production/kustomization.yaml | kustomization | OK | kustomization | Kustomization | required=PASS; top-level=PASS | none |
+
+## apps/headlamp
+
+| File | Type | Status | Role | Kinds | Validation | Warnings |
+|---|---|---:|---|---|---|---|
+| apps/headlamp/base/clusterrolebinding.yaml | yaml | OK | full resource | ClusterRoleBinding | required=PASS; top-level=PASS | none |
+| apps/headlamp/base/deployment.yaml | yaml | OK | full resource | Deployment | required=PASS; top-level=PASS | none |
+| apps/headlamp/base/kustomization.yaml | kustomization | OK | kustomization | Kustomization | required=PASS; top-level=PASS | none |
+| apps/headlamp/base/namespace.yaml | yaml | OK | full resource | Namespace | required=PASS; top-level=PASS | none |
+| apps/headlamp/base/networkpolicy-allow-from-ingress-nginx.yaml | yaml | OK | full resource | NetworkPolicy | required=PASS; top-level=PASS | none |
+| apps/headlamp/base/networkpolicy-default-deny-ingress.yaml | yaml | OK | full resource | NetworkPolicy | required=PASS; top-level=PASS | none |
+| apps/headlamp/base/sealedsecret-basic-auth.yaml | yaml | OK | full resource | SealedSecret | required=PASS; top-level=PASS | none |
+| apps/headlamp/base/service.yaml | yaml | OK | full resource | Service | required=PASS; top-level=PASS | none |
+| apps/headlamp/base/serviceaccount.yaml | yaml | OK | full resource | ServiceAccount, ServiceAccount | required=PASS; top-level=PASS | none |
+| apps/headlamp/overlays/production/ingress.yaml | yaml | OK | full resource | Ingress | required=PASS; top-level=PASS | none |
+| apps/headlamp/overlays/production/kustomization.yaml | kustomization | OK | kustomization | Kustomization | required=PASS; top-level=PASS | none |
 
 ## apps/minio
 
@@ -89,6 +105,7 @@ PASS top_level_key_checks
 | cluster/argocd/gitops-repo-service.yaml | yaml | OK | full resource | Service | required=PASS; top-level=PASS | none |
 | cluster/argocd/grim-backend-application.yaml | yaml | OK | full resource | Application | required=PASS; top-level=PASS | 2 |
 | cluster/argocd/grim-image-updater.yaml | yaml | OK | full resource | ImageUpdater | required=PASS; top-level=PASS | none |
+| cluster/argocd/headlamp-application.yaml | yaml | OK | full resource | Application | required=PASS; top-level=PASS | 2 |
 | cluster/argocd/kustomization.yaml | kustomization | OK | kustomization | Kustomization | required=PASS; top-level=PASS | none |
 | cluster/argocd/minio-application.yaml | yaml | OK | full resource | Application | required=PASS; top-level=PASS | 2 |
 

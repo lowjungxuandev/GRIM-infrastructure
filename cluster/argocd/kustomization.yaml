@@ -12,6 +12,7 @@ resources:
   - argocd-server-ingress.yaml
   - grim-backend-application.yaml
   - minio-application.yaml
+  - headlamp-application.yaml
   - grim-image-updater.yaml
 
 patches:

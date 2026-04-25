@@ -2,10 +2,11 @@
 
 ## High
 
-- `README.md:99`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
+- `README.md:100`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
 - `apps/grim-backend/overlays/production/ingress-openapi.yaml:10`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
 - `apps/grim-backend/overlays/production/ingress-patch.yaml:14`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
 - `apps/grim-backend/overlays/production/ingress-root-redirect.yaml:7`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
+- `apps/headlamp/overlays/production/ingress.yaml:18`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
 - `apps/minio/base/deployment.yaml:37`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
 - `apps/minio/overlays/production/ingress.yaml:16`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
 - `cluster/argocd/argocd-server-ingress.yaml:12`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
@@ -24,6 +25,8 @@
 - `cluster/argocd/grim-backend-application.yaml:11`: Argo CD Application uses internal git:// source. The Git source of truth is inside the same cluster it manages; external Git remains deferred.
 - `cluster/argocd/grim-backend-application.yaml:18`: Argo CD Application enables automated prune/self-heal. Automated remediation is useful but increases the impact of a bad source commit.
 - `cluster/argocd/grim-image-updater.yaml:8`: Argo CD Image Updater write-back uses argocd method. Git write-back is deferred until an external Git source is selected.
+- `cluster/argocd/headlamp-application.yaml:11`: Argo CD Application uses internal git:// source. The Git source of truth is inside the same cluster it manages; external Git remains deferred.
+- `cluster/argocd/headlamp-application.yaml:18`: Argo CD Application enables automated prune/self-heal. Automated remediation is useful but increases the impact of a bad source commit.
 - `cluster/argocd/minio-application.yaml:11`: Argo CD Application uses internal git:// source. The Git source of truth is inside the same cluster it manages; external Git remains deferred.
 - `cluster/argocd/minio-application.yaml:18`: Argo CD Application enables automated prune/self-heal. Automated remediation is useful but increases the impact of a bad source commit.
 - `cluster/metrics-server/kustomization.yaml:13`: metrics-server skips kubelet TLS verification. This flag is useful for lab clusters but should be replaced by kubelet serving certificate trust in production.

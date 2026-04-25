@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: headlamp
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: headlamp
+spec:
+  project: default
+  source:
+    repoURL: git://gitops-git.argocd.svc.cluster.local/gitops.git
+    targetRevision: main
+    path: apps/headlamp/overlays/production
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: headlamp
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
