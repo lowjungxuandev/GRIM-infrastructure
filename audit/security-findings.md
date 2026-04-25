@@ -9,7 +9,7 @@
 - `apps/headlamp/overlays/production/ingress.yaml:18`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
 - `apps/minio/base/deployment.yaml:37`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
 - `apps/minio/overlays/production/ingress.yaml:17`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
-- `apps/prometheus/base/deployment.yaml:41`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
+- `apps/prometheus/base/deployment.yaml:53`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
 - `apps/prometheus/overlays/production/ingress.yaml:18`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
 - `cluster/argocd/argocd-server-ingress.yaml:13`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
 - `docs/get-started.md:52`: Hardcoded personal domain remains. Environment-specific hostnames should be placeholders or overlays.
