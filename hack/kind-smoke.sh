@@ -112,7 +112,13 @@ scripts/generate-sealed-secret.sh \
   --output "$tmp_secret" >/dev/null || fail "disposable MinIO SealedSecret generation failed"
 
 kubectl apply -f "$tmp_secret" || fail "disposable MinIO SealedSecret apply failed"
-kubectl -n minio wait --for=jsonpath='{.metadata.name}'=minio-root-credentials secret/minio-root-credentials --timeout=120s || fail "disposable MinIO SealedSecret did not unseal"
+secret_deadline=$((SECONDS + 120))
+until kubectl -n minio get secret minio-root-credentials >/dev/null 2>&1; do
+  if (( SECONDS >= secret_deadline )); then
+    fail "disposable MinIO SealedSecret did not unseal"
+  fi
+  sleep 2
+done
 append_result "PASS disposable MinIO SealedSecret unsealed in kind"
 
 # Server-side dry-run validates namespaced resources but does not persist Namespace
