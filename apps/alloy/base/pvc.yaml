@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: alloy-data
+  namespace: alloy
+spec:
+  storageClassName: alloy-local
+  volumeName: alloy-data
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

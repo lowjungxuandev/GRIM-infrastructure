@@ -1,0 +1,107 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alloy
+  namespace: alloy
+  labels:
+    app.kubernetes.io/name: alloy
+    app.kubernetes.io/part-of: alloy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: alloy
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: alloy
+        app.kubernetes.io/part-of: alloy
+    spec:
+      serviceAccountName: alloy
+      automountServiceAccountToken: true
+      securityContext:
+        fsGroup: 473
+        seccompProfile:
+          type: RuntimeDefault
+      initContainers:
+        - name: init-data-permissions
+          image: docker.io/library/busybox:1.37.0
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - chown -R 473:473 /var/lib/alloy
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            runAsUser: 0
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/alloy
+      containers:
+        - name: alloy
+          image: docker.io/grafana/alloy:v1.16.0
+          imagePullPolicy: IfNotPresent
+          args:
+            - run
+            - --server.http.listen-addr=0.0.0.0:12345
+            - --server.http.ui-path-prefix=/alloy
+            - --storage.path=/var/lib/alloy/data
+            - --disable-reporting
+            - /etc/alloy/config.alloy
+          ports:
+            - name: http
+              containerPort: 12345
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /-/ready
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 6
+          livenessProbe:
+            httpGet:
+              path: /-/ready
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 20
+            timeoutSeconds: 5
+            failureThreshold: 6
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: "1"
+              memory: 1Gi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsGroup: 473
+            runAsNonRoot: true
+            runAsUser: 473
+          volumeMounts:
+            - name: config
+              mountPath: /etc/alloy
+              readOnly: true
+            - name: data
+              mountPath: /var/lib/alloy
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: config
+          configMap:
+            name: alloy-config
+        - name: data
+          persistentVolumeClaim:
+            claimName: alloy-data
+        - name: tmp
+          emptyDir: {}

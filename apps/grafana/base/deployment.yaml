@@ -16,7 +16,8 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/dashboards: 4e2427cbb95cf45e78b92e728557f25788a78e4feeaf6cff34809b15febc82b5
+        checksum/dashboards: e7d48cf0a3bce16020612ac00f3f9b018164c216f4b3bec93bbe21ea569fe818
+        checksum/datasources: d8d6dae8a138c7000a28c04598c2d99198e0513c3f96b0059b03d93c2fba66f5
       labels:
         app.kubernetes.io/name: grafana
         app.kubernetes.io/part-of: grafana
@@ -138,3 +139,5 @@ spec:
                   name: grafana-dashboard-kubernetes-objects
               - configMap:
                   name: grafana-dashboard-node-exporter
+              - configMap:
+                  name: grafana-dashboard-logs-overview
