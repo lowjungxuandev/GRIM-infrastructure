@@ -1,6 +1,6 @@
 # Manifest Inventory
 
-PASS parsed_yaml=44/44
+PASS parsed_yaml=46/46
 PASS required_field_checks
 PASS top_level_key_checks
 
@@ -43,9 +43,10 @@ PASS top_level_key_checks
 
 | File | Type | Status | Role | Kinds | Validation | Warnings |
 |---|---|---:|---|---|---|---|
-| apps/minio/base/deployment.yaml | yaml | OK | full resource | Deployment | required=PASS; top-level=PASS | none |
+| apps/minio/base/deployment.yaml | yaml | OK | full resource | Deployment | required=PASS; top-level=PASS | 1 |
 | apps/minio/base/kustomization.yaml | kustomization | OK | kustomization | Kustomization | required=PASS; top-level=PASS | none |
 | apps/minio/base/namespace.yaml | yaml | OK | full resource | Namespace | required=PASS; top-level=PASS | none |
+| apps/minio/base/networkpolicy-allow-console-public.yaml | yaml | OK | full resource | NetworkPolicy | required=PASS; top-level=PASS | none |
 | apps/minio/base/networkpolicy-allow-from-grim-backend.yaml | yaml | OK | full resource | NetworkPolicy | required=PASS; top-level=PASS | none |
 | apps/minio/base/networkpolicy-default-deny-ingress.yaml | yaml | OK | full resource | NetworkPolicy | required=PASS; top-level=PASS | none |
 | apps/minio/base/pv.yaml | yaml | OK | full resource | PersistentVolume | required=PASS; top-level=PASS | 1 |
@@ -73,6 +74,7 @@ PASS top_level_key_checks
 | cluster/argocd/argocd-cmd-params-patch.yaml | yaml | OK-patch | patch fragment | ConfigMap | required=PASS; top-level=PASS | none |
 | cluster/argocd/argocd-rbac-cm-patch.yaml | yaml | OK-patch | patch fragment | ConfigMap | required=PASS; top-level=PASS | none |
 | cluster/argocd/argocd-secret-accounts-patch.yaml | yaml | OK-patch | patch fragment | Secret | required=PASS; top-level=PASS | 1 |
+| cluster/argocd/argocd-server-deployment-patch.yaml | yaml | OK-patch | patch fragment | Deployment | required=PASS; top-level=PASS | none |
 | cluster/argocd/argocd-server-ingress.yaml | yaml | OK | full resource | Ingress | required=PASS; top-level=PASS | none |
 | cluster/argocd/gitops-git-daemon-deployment.yaml | yaml | OK | full resource | Deployment | required=PASS; top-level=PASS | 1 |
 | cluster/argocd/gitops-git-daemon-service.yaml | yaml | OK | full resource | Service | required=PASS; top-level=PASS | none |

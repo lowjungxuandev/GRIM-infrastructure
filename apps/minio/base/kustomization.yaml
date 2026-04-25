@@ -9,3 +9,4 @@ resources:
   - service.yaml
   - networkpolicy-default-deny-ingress.yaml
   - networkpolicy-allow-from-grim-backend.yaml
+  - networkpolicy-allow-console-public.yaml

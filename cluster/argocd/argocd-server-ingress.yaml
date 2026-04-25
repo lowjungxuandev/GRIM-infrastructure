@@ -9,13 +9,13 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - argocd.example.com
+        - lowjungxuan.dpdns.org
       secretName: argocd-server-tls
   rules:
-    - host: argocd.example.com
+    - host: lowjungxuan.dpdns.org
       http:
         paths:
-          - path: /
+          - path: /argocd
             pathType: Prefix
             backend:
               service:

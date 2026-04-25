@@ -19,3 +19,4 @@ patches:
   - path: argocd-cm-accounts-patch.yaml
   - path: argocd-rbac-cm-patch.yaml
   - path: argocd-secret-accounts-patch.yaml
+  - path: argocd-server-deployment-patch.yaml
