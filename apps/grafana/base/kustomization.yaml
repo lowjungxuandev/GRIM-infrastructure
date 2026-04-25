@@ -4,6 +4,7 @@ resources:
   - namespace.yaml
   - serviceaccount.yaml
   - sealedsecret-admin-credentials.yaml
+  - sealedsecret-tls.yaml
   - configmap-datasources.yaml
   - pv.yaml
   - pvc.yaml
