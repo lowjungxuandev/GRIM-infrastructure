@@ -4,8 +4,8 @@ Resolved on 2026-04-25 from official release APIs, package indexes, and image re
 
 | Component | Previous | Current/latest | Status | Reference |
 |---|---:|---:|---|---|
-| Kubernetes kubeadm config | `v1.34.0` | `v1.36.0` | Updated | `cluster/kubeadm/kubeadm-config.yaml` |
-| Kubernetes apt repository minor | `v1.34` | `v1.36` | Updated | `cluster/kubeadm/install-tools-ubuntu.sh` |
+| Kubernetes kubeadm config | `v1.34.0` | `v1.35.4` | Updated to requested minor | `cluster/kubeadm/kubeadm-config.yaml` |
+| Kubernetes apt repository minor | `v1.34` | `v1.35` | Updated to requested minor | `cluster/kubeadm/install-tools-ubuntu.sh` |
 | Argo CD | `v3.3.8` | `v3.3.8` | Current | `https://raw.githubusercontent.com/argoproj/argo-cd/v3.3.8/manifests/install.yaml` |
 | Argo CD Image Updater | `v1.1.1` | `v1.1.1` | Current | `https://raw.githubusercontent.com/argoproj-labs/argocd-image-updater/v1.1.1/config/install.yaml` |
 | ingress-nginx | `controller-v1.15.1` | `controller-v1.15.1` | Current | `cluster/ingress-nginx/kustomization.yaml` |
