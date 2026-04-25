@@ -16,7 +16,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/dashboards: e7d48cf0a3bce16020612ac00f3f9b018164c216f4b3bec93bbe21ea569fe818
+        checksum/dashboards: 11c6c2102311b45c6ef905ce4af5970e1165cb0562fd84327e238b37b4e46013
         checksum/datasources: d8d6dae8a138c7000a28c04598c2d99198e0513c3f96b0059b03d93c2fba66f5
       labels:
         app.kubernetes.io/name: grafana
