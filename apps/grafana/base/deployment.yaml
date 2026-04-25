@@ -128,5 +128,11 @@ spec:
           configMap:
             name: grafana-dashboard-providers
         - name: dashboards
-          configMap:
-            name: grafana-dashboard-kubernetes-overview
+          projected:
+            sources:
+              - configMap:
+                  name: grafana-dashboard-kubernetes-overview
+              - configMap:
+                  name: grafana-dashboard-kubernetes-objects
+              - configMap:
+                  name: grafana-dashboard-node-exporter

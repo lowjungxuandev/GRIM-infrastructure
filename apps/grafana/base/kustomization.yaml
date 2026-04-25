@@ -8,6 +8,8 @@ resources:
   - configmap-datasources.yaml
   - configmap-dashboard-providers.yaml
   - configmap-dashboard-kubernetes-overview.yaml
+  - configmap-dashboard-kubernetes-objects.yaml
+  - configmap-dashboard-node-exporter.yaml
   - pv.yaml
   - pvc.yaml
   - deployment.yaml

@@ -7,6 +7,8 @@ resources:
   - clusterrolebinding.yaml
   - sealedsecret-basic-auth.yaml
   - configmap.yaml
+  - kube-state-metrics.yaml
+  - node-exporter.yaml
   - pv.yaml
   - pvc.yaml
   - deployment.yaml
@@ -14,3 +16,4 @@ resources:
   - networkpolicy-default-deny-ingress.yaml
   - networkpolicy-allow-from-ingress-nginx.yaml
   - networkpolicy-allow-from-grafana.yaml
+  - networkpolicy-allow-prometheus-scrapes.yaml
