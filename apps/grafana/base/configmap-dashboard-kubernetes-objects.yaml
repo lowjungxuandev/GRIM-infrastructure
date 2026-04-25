@@ -68,7 +68,7 @@ data:
                 "type": "prometheus",
                 "uid": "prometheus"
               },
-              "expr": "sum(up{kubernetes_name=\"kube-state-metrics\"})",
+              "expr": "max(up{kubernetes_name=\"kube-state-metrics\"})",
               "refId": "A"
             }
           ],
@@ -129,7 +129,7 @@ data:
                 "type": "prometheus",
                 "uid": "prometheus"
               },
-              "expr": "100 * sum(kube_deployment_status_replicas_available{namespace=~\"$namespace\"}) / clamp_min(sum(kube_deployment_spec_replicas{namespace=~\"$namespace\"}), 1)",
+              "expr": "100 * sum(max by (namespace, deployment) (kube_deployment_status_replicas_available{namespace=~\"$namespace\"})) / clamp_min(sum(max by (namespace, deployment) (kube_deployment_spec_replicas{namespace=~\"$namespace\"})), 1)",
               "refId": "A"
             }
           ],
@@ -192,7 +192,7 @@ data:
                 "type": "prometheus",
                 "uid": "prometheus"
               },
-              "expr": "sum(kube_deployment_status_replicas_unavailable{namespace=~\"$namespace\"})",
+              "expr": "sum(max by (namespace, deployment) (kube_deployment_status_replicas_unavailable{namespace=~\"$namespace\"}))",
               "refId": "A"
             }
           ],
@@ -255,7 +255,7 @@ data:
                 "type": "prometheus",
                 "uid": "prometheus"
               },
-              "expr": "sum(kube_pod_status_phase{namespace=~\"$namespace\",phase=~\"Pending|Failed|Unknown\"})",
+              "expr": "sum(max by (namespace, pod, phase) (kube_pod_status_phase{namespace=~\"$namespace\",phase=~\"Pending|Failed|Unknown\"}))",
               "refId": "A"
             }
           ],
@@ -318,7 +318,7 @@ data:
                 "type": "prometheus",
                 "uid": "prometheus"
               },
-              "expr": "sum(increase(kube_pod_container_status_restarts_total{namespace=~\"$namespace\"}[1h]))",
+              "expr": "sum(max by (namespace, pod, container) (increase(kube_pod_container_status_restarts_total{namespace=~\"$namespace\"}[1h])))",
               "refId": "A"
             }
           ],
@@ -377,7 +377,7 @@ data:
                 "type": "prometheus",
                 "uid": "prometheus"
               },
-              "expr": "count(kube_namespace_created)",
+              "expr": "count(max by (namespace) (kube_namespace_created))",
               "refId": "A"
             }
           ],
@@ -438,7 +438,7 @@ data:
                 "type": "prometheus",
                 "uid": "prometheus"
               },
-              "expr": "100 * sum(kube_persistentvolumeclaim_status_phase{namespace=~\"$namespace\",phase=\"Bound\"}) / clamp_min(sum(kube_persistentvolumeclaim_status_phase{namespace=~\"$namespace\"}), 1)",
+              "expr": "100 * sum(max by (namespace, persistentvolumeclaim, phase) (kube_persistentvolumeclaim_status_phase{namespace=~\"$namespace\",phase=\"Bound\"})) / clamp_min(sum(max by (namespace, persistentvolumeclaim, phase) (kube_persistentvolumeclaim_status_phase{namespace=~\"$namespace\"})), 1)",
               "refId": "A"
             }
           ],
@@ -497,7 +497,7 @@ data:
                 "type": "prometheus",
                 "uid": "prometheus"
               },
-              "expr": "sum(kube_job_status_failed{namespace=~\"$namespace\"})",
+              "expr": "sum(max by (namespace, job_name) (kube_job_status_failed{namespace=~\"$namespace\"}))",
               "refId": "A"
             }
           ],
@@ -699,7 +699,7 @@ data:
                 "type": "prometheus",
                 "uid": "prometheus"
               },
-              "expr": "sort_desc(topk(12, increase(kube_pod_container_status_restarts_total{namespace=~\"$namespace\"}[6h])))",
+              "expr": "sort_desc(topk(12, max by (namespace, pod, container) (increase(kube_pod_container_status_restarts_total{namespace=~\"$namespace\"}[6h]))))",
               "legendFormat": "{{namespace}}/{{pod}}/{{container}}",
               "refId": "A"
             }
@@ -766,7 +766,7 @@ data:
                 "type": "prometheus",
                 "uid": "prometheus"
               },
-              "expr": "sort_desc(topk(12, kube_deployment_status_replicas_unavailable{namespace=~\"$namespace\"}))",
+              "expr": "sort_desc(topk(12, max by (namespace, deployment) (kube_deployment_status_replicas_unavailable{namespace=~\"$namespace\"})))",
               "legendFormat": "{{namespace}}/{{deployment}}",
               "refId": "A"
             }
@@ -820,7 +820,7 @@ data:
                 "type": "prometheus",
                 "uid": "prometheus"
               },
-              "expr": "sum by (phase) (kube_pod_status_phase{namespace=~\"$namespace\"})",
+              "expr": "sum by (phase) (max by (namespace, pod, phase) (kube_pod_status_phase{namespace=~\"$namespace\"}))",
               "legendFormat": "{{phase}}",
               "refId": "A"
             }
@@ -874,7 +874,7 @@ data:
                 "type": "prometheus",
                 "uid": "prometheus"
               },
-              "expr": "sum(kube_deployment_status_replicas_unavailable{namespace=~\"$namespace\"})",
+              "expr": "sum(max by (namespace, deployment) (kube_deployment_status_replicas_unavailable{namespace=~\"$namespace\"}))",
               "legendFormat": "deploy unavailable",
               "refId": "A"
             },
@@ -883,7 +883,7 @@ data:
                 "type": "prometheus",
                 "uid": "prometheus"
               },
-              "expr": "sum(kube_statefulset_status_replicas_unavailable{namespace=~\"$namespace\"})",
+              "expr": "sum(max by (namespace, statefulset) (kube_statefulset_status_replicas_unavailable{namespace=~\"$namespace\"}))",
               "legendFormat": "statefulset unavailable",
               "refId": "B"
             }
@@ -937,7 +937,7 @@ data:
                 "type": "prometheus",
                 "uid": "prometheus"
               },
-              "expr": "sum by (namespace) (increase(kube_pod_container_status_restarts_total{namespace=~\"$namespace\"}[5m]))",
+              "expr": "sum by (namespace) (max by (namespace, pod, container) (increase(kube_pod_container_status_restarts_total{namespace=~\"$namespace\"}[5m])))",
               "legendFormat": "{{namespace}}",
               "refId": "A"
             }
@@ -996,7 +996,7 @@ data:
                 "type": "prometheus",
                 "uid": "prometheus"
               },
-              "expr": "sort_desc(topk(15, sum by (namespace) (kube_pod_status_phase{namespace=~\"$namespace\",phase=\"Running\"})))",
+              "expr": "sort_desc(topk(15, sum by (namespace) (max by (namespace, pod, phase) (kube_pod_status_phase{namespace=~\"$namespace\",phase=\"Running\"}))))",
               "legendFormat": "{{namespace}}",
               "refId": "A"
             }
@@ -1055,7 +1055,7 @@ data:
                 "type": "prometheus",
                 "uid": "prometheus"
               },
-              "expr": "sort_desc(sum by (workload) (label_replace(kube_deployment_created{namespace=~\"$namespace\"}, \"workload\", \"deployment\", \"deployment\", \".*\") or label_replace(kube_statefulset_created{namespace=~\"$namespace\"}, \"workload\", \"statefulset\", \"statefulset\", \".*\") or label_replace(kube_daemonset_created{namespace=~\"$namespace\"}, \"workload\", \"daemonset\", \"daemonset\", \".*\")))",
+              "expr": "sort_desc(count by (workload) (label_replace(max by (namespace, deployment) (kube_deployment_created{namespace=~\"$namespace\"}), \"workload\", \"deployment\", \"deployment\", \".*\") or label_replace(max by (namespace, statefulset) (kube_statefulset_created{namespace=~\"$namespace\"}), \"workload\", \"statefulset\", \"statefulset\", \".*\") or label_replace(max by (namespace, daemonset) (kube_daemonset_created{namespace=~\"$namespace\"}), \"workload\", \"daemonset\", \"daemonset\", \".*\")))",
               "legendFormat": "{{workload}}",
               "refId": "A"
             }
@@ -1118,7 +1118,7 @@ data:
                 "type": "prometheus",
                 "uid": "prometheus"
               },
-              "expr": "sort_desc(sum by (condition) (kube_node_status_condition{status=\"true\",condition!=\"Ready\"}))",
+              "expr": "sort_desc(sum by (condition) (max by (node, condition) (kube_node_status_condition{status=\"true\",condition!=\"Ready\"})))",
               "legendFormat": "{{condition}}",
               "refId": "A"
             }
@@ -1181,7 +1181,7 @@ data:
                 "type": "prometheus",
                 "uid": "prometheus"
               },
-              "expr": "sort_desc(sum by (phase) (kube_persistentvolumeclaim_status_phase{namespace=~\"$namespace\"}))",
+              "expr": "sort_desc(sum by (phase) (max by (namespace, persistentvolumeclaim, phase) (kube_persistentvolumeclaim_status_phase{namespace=~\"$namespace\"})))",
               "legendFormat": "{{phase}}",
               "refId": "A"
             }
@@ -1250,7 +1250,7 @@ data:
                 "type": "prometheus",
                 "uid": "prometheus"
               },
-              "expr": "sort_desc(kube_deployment_status_replicas_unavailable{namespace=~\"$namespace\"})",
+              "expr": "sort_desc(max by (namespace, deployment) (kube_deployment_status_replicas_unavailable{namespace=~\"$namespace\"}))",
               "format": "table",
               "instant": true,
               "refId": "A"
@@ -1320,7 +1320,7 @@ data:
                 "type": "prometheus",
                 "uid": "prometheus"
               },
-              "expr": "sort_desc(kube_pod_container_status_waiting_reason{namespace=~\"$namespace\"})",
+              "expr": "sort_desc(max by (namespace, pod, container, reason) (kube_pod_container_status_waiting_reason{namespace=~\"$namespace\"}))",
               "format": "table",
               "instant": true,
               "refId": "A"
@@ -1390,7 +1390,7 @@ data:
                 "type": "prometheus",
                 "uid": "prometheus"
               },
-              "expr": "sort_desc(kube_job_status_failed{namespace=~\"$namespace\"})",
+              "expr": "sort_desc(max by (namespace, job_name) (kube_job_status_failed{namespace=~\"$namespace\"}))",
               "format": "table",
               "instant": true,
               "refId": "A"
