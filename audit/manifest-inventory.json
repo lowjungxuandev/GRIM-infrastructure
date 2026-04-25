@@ -141,7 +141,7 @@
     "role": "full resource",
     "kinds": "Deployment",
     "validation": "required=PASS; top-level=PASS",
-    "warnings": "1"
+    "warnings": "none"
   },
   {
     "path": "apps/minio/base/kustomization.yaml",
