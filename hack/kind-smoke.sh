@@ -96,6 +96,7 @@ kubectl apply -k cluster/sealed-secrets || fail "sealed-secrets apply failed"
 kubectl -n kube-system rollout status deployment/sealed-secrets-controller --timeout=180s || fail "sealed-secrets controller not Available"
 
 kubectl create namespace minio --dry-run=client -o yaml | kubectl apply -f - || fail "minio namespace creation failed"
+kubectl create namespace grim --dry-run=client -o yaml | kubectl apply -f - || fail "grim namespace creation failed"
 
 tmp_secret="$(mktemp)"
 SMOKE_MINIO_USER="${SUPPLIED_USERNAME:-kind-minio-user}"
@@ -114,6 +115,8 @@ kubectl apply -f "$tmp_secret" || fail "disposable MinIO SealedSecret apply fail
 kubectl -n minio wait --for=jsonpath='{.metadata.name}'=minio-root-credentials secret/minio-root-credentials --timeout=120s || fail "disposable MinIO SealedSecret did not unseal"
 append_result "PASS disposable MinIO SealedSecret unsealed in kind"
 
+# Server-side dry-run validates namespaced resources but does not persist Namespace
+# objects from the same input stream, so the smoke cluster creates namespaces first.
 kubectl apply --server-side --dry-run=server -k apps/grim-backend/overlays/production >/dev/null || fail "server dry-run grim-backend failed"
 kubectl apply --server-side --dry-run=server -k apps/minio/overlays/production >/dev/null || fail "server dry-run minio failed"
 append_result "PASS server-side dry-run for grim-backend and minio overlays"
