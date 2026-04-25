@@ -1,6 +1,6 @@
 # Manifest Inventory
 
-PASS parsed_yaml=46/46
+PASS parsed_yaml=47/47
 PASS required_field_checks
 PASS top_level_key_checks
 
@@ -53,6 +53,7 @@ PASS top_level_key_checks
 | apps/minio/base/pvc.yaml | yaml | OK | full resource | PersistentVolumeClaim | required=PASS; top-level=PASS | none |
 | apps/minio/base/secret-template.yaml | yaml | OK | template | Secret | required=PASS; top-level=PASS | 1 |
 | apps/minio/base/service.yaml | yaml | OK | full resource | Service | required=PASS; top-level=PASS | none |
+| apps/minio/overlays/production/ingress.yaml | yaml | OK | full resource | Ingress | required=PASS; top-level=PASS | none |
 | apps/minio/overlays/production/kustomization.yaml | kustomization | OK | kustomization | Kustomization | required=PASS; top-level=PASS | none |
 
 ## audit
