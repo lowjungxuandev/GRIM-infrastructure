@@ -30,6 +30,7 @@ For a clean VM setup, follow [docs/get-started.md](docs/get-started.md). It cove
 - `apps/grim-backend`: GRIM backend base and production overlay
 - `apps/minio`: MinIO base and production overlay
 - `apps/headlamp`: Headlamp Kubernetes dashboard base and production overlay
+- `apps/prometheus`: Prometheus monitoring server base and production overlay
 - `hack`: validation and smoke-test helpers
 - `audit`: generated manifest inventory, security findings, deferred items, and test results
 - `scripts`: render/apply helpers
@@ -99,6 +100,7 @@ sudo ./install-tools-ubuntu.sh
 - The ingress controller uses the official bare-metal deployment patched to `hostNetwork: true`, so ports `80` and `443` bind directly on the ingress node.
 - The MinIO console is served at `https://lowjungxuan.dpdns.org/minIO/`; the S3 API is served separately at `https://lowjxn8n.dpdns.org/`.
 - Headlamp is served at `https://lowjungxuan.dpdns.org/headlamp/`.
+- Prometheus is served at `https://lowjungxuan.dpdns.org/prometheus/`.
 - Public ingress TLS certificates are issued by cert-manager through the `letsencrypt-prod` ClusterIssuer.
 - Keep the MinIO S3 API DNS record DNS-only when using Cloudflare. S3 clients and presigned URLs are sensitive to proxy upload limits and signature-changing behavior.
 - Argo CD dashboard ingress is configured in `cluster/argocd/argocd-server-ingress.yaml` and expects HTTPS termination at ingress.

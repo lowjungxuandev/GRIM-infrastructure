@@ -387,6 +387,141 @@
     "warnings": "none"
   },
   {
+    "path": "apps/prometheus/base/clusterrole.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "ClusterRole",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/prometheus/base/clusterrolebinding.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "ClusterRoleBinding",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/prometheus/base/configmap.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "ConfigMap",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/prometheus/base/deployment.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "Deployment",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/prometheus/base/kustomization.yaml",
+    "type": "kustomization",
+    "status": "OK",
+    "role": "kustomization",
+    "kinds": "Kustomization",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/prometheus/base/namespace.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "Namespace",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/prometheus/base/networkpolicy-allow-from-ingress-nginx.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "NetworkPolicy",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/prometheus/base/networkpolicy-default-deny-ingress.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "NetworkPolicy",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/prometheus/base/pv.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "PersistentVolume",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "1"
+  },
+  {
+    "path": "apps/prometheus/base/pvc.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "PersistentVolumeClaim",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/prometheus/base/sealedsecret-basic-auth.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "SealedSecret",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/prometheus/base/service.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "Service",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/prometheus/base/serviceaccount.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "ServiceAccount",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/prometheus/overlays/production/ingress.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "Ingress",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
+    "path": "apps/prometheus/overlays/production/kustomization.yaml",
+    "type": "kustomization",
+    "status": "OK",
+    "role": "kustomization",
+    "kinds": "Kustomization",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "none"
+  },
+  {
     "path": "audit/deferred-items.md",
     "type": "markdown",
     "status": "N/A",
@@ -577,6 +712,15 @@
   },
   {
     "path": "cluster/argocd/minio-application.yaml",
+    "type": "yaml",
+    "status": "OK",
+    "role": "full resource",
+    "kinds": "Application",
+    "validation": "required=PASS; top-level=PASS",
+    "warnings": "2"
+  },
+  {
+    "path": "cluster/argocd/prometheus-application.yaml",
     "type": "yaml",
     "status": "OK",
     "role": "full resource",

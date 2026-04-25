@@ -13,6 +13,7 @@ resources:
   - grim-backend-application.yaml
   - minio-application.yaml
   - headlamp-application.yaml
+  - prometheus-application.yaml
   - grim-image-updater.yaml
 
 patches:

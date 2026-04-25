@@ -1,6 +1,6 @@
 # Manifest Inventory
 
-PASS parsed_yaml=67/67
+PASS parsed_yaml=83/83
 PASS required_field_checks
 PASS top_level_key_checks
 
@@ -77,6 +77,26 @@ PASS top_level_key_checks
 | apps/minio/overlays/production/kustomization.yaml | kustomization | OK | kustomization | Kustomization | required=PASS; top-level=PASS | none |
 | apps/minio/overlays/production/networkpolicy-allow-api-from-ingress-nginx.yaml | yaml | OK | full resource | NetworkPolicy | required=PASS; top-level=PASS | none |
 
+## apps/prometheus
+
+| File | Type | Status | Role | Kinds | Validation | Warnings |
+|---|---|---:|---|---|---|---|
+| apps/prometheus/base/clusterrole.yaml | yaml | OK | full resource | ClusterRole | required=PASS; top-level=PASS | none |
+| apps/prometheus/base/clusterrolebinding.yaml | yaml | OK | full resource | ClusterRoleBinding | required=PASS; top-level=PASS | none |
+| apps/prometheus/base/configmap.yaml | yaml | OK | full resource | ConfigMap | required=PASS; top-level=PASS | none |
+| apps/prometheus/base/deployment.yaml | yaml | OK | full resource | Deployment | required=PASS; top-level=PASS | none |
+| apps/prometheus/base/kustomization.yaml | kustomization | OK | kustomization | Kustomization | required=PASS; top-level=PASS | none |
+| apps/prometheus/base/namespace.yaml | yaml | OK | full resource | Namespace | required=PASS; top-level=PASS | none |
+| apps/prometheus/base/networkpolicy-allow-from-ingress-nginx.yaml | yaml | OK | full resource | NetworkPolicy | required=PASS; top-level=PASS | none |
+| apps/prometheus/base/networkpolicy-default-deny-ingress.yaml | yaml | OK | full resource | NetworkPolicy | required=PASS; top-level=PASS | none |
+| apps/prometheus/base/pv.yaml | yaml | OK | full resource | PersistentVolume | required=PASS; top-level=PASS | 1 |
+| apps/prometheus/base/pvc.yaml | yaml | OK | full resource | PersistentVolumeClaim | required=PASS; top-level=PASS | none |
+| apps/prometheus/base/sealedsecret-basic-auth.yaml | yaml | OK | full resource | SealedSecret | required=PASS; top-level=PASS | none |
+| apps/prometheus/base/service.yaml | yaml | OK | full resource | Service | required=PASS; top-level=PASS | none |
+| apps/prometheus/base/serviceaccount.yaml | yaml | OK | full resource | ServiceAccount | required=PASS; top-level=PASS | none |
+| apps/prometheus/overlays/production/ingress.yaml | yaml | OK | full resource | Ingress | required=PASS; top-level=PASS | none |
+| apps/prometheus/overlays/production/kustomization.yaml | kustomization | OK | kustomization | Kustomization | required=PASS; top-level=PASS | none |
+
 ## audit
 
 | File | Type | Status | Role | Kinds | Validation | Warnings |
@@ -108,6 +128,7 @@ PASS top_level_key_checks
 | cluster/argocd/headlamp-application.yaml | yaml | OK | full resource | Application | required=PASS; top-level=PASS | 2 |
 | cluster/argocd/kustomization.yaml | kustomization | OK | kustomization | Kustomization | required=PASS; top-level=PASS | none |
 | cluster/argocd/minio-application.yaml | yaml | OK | full resource | Application | required=PASS; top-level=PASS | 2 |
+| cluster/argocd/prometheus-application.yaml | yaml | OK | full resource | Application | required=PASS; top-level=PASS | 2 |
 
 ## cluster/cert-manager
 
