@@ -111,6 +111,12 @@ spec:
             - name: datasources
               mountPath: /etc/grafana/provisioning/datasources
               readOnly: true
+            - name: dashboard-providers
+              mountPath: /etc/grafana/provisioning/dashboards
+              readOnly: true
+            - name: dashboards
+              mountPath: /var/lib/grafana/dashboards
+              readOnly: true
       volumes:
         - name: data
           persistentVolumeClaim:
@@ -118,3 +124,9 @@ spec:
         - name: datasources
           configMap:
             name: grafana-datasources
+        - name: dashboard-providers
+          configMap:
+            name: grafana-dashboard-providers
+        - name: dashboards
+          configMap:
+            name: grafana-dashboard-kubernetes-overview

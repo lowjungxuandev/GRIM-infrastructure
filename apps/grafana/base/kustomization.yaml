@@ -6,6 +6,8 @@ resources:
   - sealedsecret-admin-credentials.yaml
   - sealedsecret-tls.yaml
   - configmap-datasources.yaml
+  - configmap-dashboard-providers.yaml
+  - configmap-dashboard-kubernetes-overview.yaml
   - pv.yaml
   - pvc.yaml
   - deployment.yaml
